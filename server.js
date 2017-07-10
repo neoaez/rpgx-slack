@@ -35,10 +35,12 @@ I will respond to the following messages:
 
 // response to the user typing "help"
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
-  msg.say(HELP_TEXT),
-  DataStore.set('u::c::jenkins', { name: 'Jenkins', thumb: 'https://u8921732.dl.dropboxusercontent.com/u/8921732/slack/thumbs/ar_jenkins.png' }, function (err) {
+  msg.say(HELP_TEXT)//,
+
+  // testing persist data
+  //DataStore.set('u::c::jenkins', { name: 'Jenkins', thumb: 'https://u8921732.dl.dropboxusercontent.com/u/8921732/slack/thumbs/ar_jenkins.png' }, function (err) {
     // [TO DO] handle error
-  })
+  //})
 })
 
 // "Conversation" flow that tracks state - kicks off when user says hi, hello or hey
@@ -95,13 +97,15 @@ slapp.message(/^(thanks|thank you)/i, ['mention', 'direct_message'], (msg) => {
     'You bet',
     ':+1: Of course',
     'Anytime :sun_with_face: :full_moon_with_face:'
-  ]), 
-  DataStore.get('u::c::jenkins', function (err, val) {
+  ])//, 
+
+  // testing persist data
+  //DataStore.get('u::c::jenkins', function (err, val) {
     // [TO DO] handle error
-    msg.say([
-      `Data retrieved: ${val.thumb}`,
-    ])   
-  })
+    //msg.say([
+      //`Data retrieved: ${val.thumb}`,
+    //])   
+  //})
 })
 
 // demonstrate returning an attachment...
@@ -116,6 +120,37 @@ slapp.message('attachment', ['mention', 'direct_message'], (msg) => {
       color: '#7CD197'
     }]
   })
+})
+
+
+// Slash Command: ... 
+slapp.command('/roll', (msg) => {
+
+  const dieCodeSymbol = 'd'
+
+  // create a variable to hold the end result of our dice rolling
+  rollResult = null
+
+  // we need to assume that any text send after the /roll command is the code used to tell our dice roller what to do.
+  // we will parse this out and handle any errors.
+  diceCode = msg.body.text
+
+  // check for the presence of 'd' or 'D' in the dice code.
+  if (diceCode.toLowercase().indexOf(dieCodeSymbol) != -1) {
+    // [DEBUG] 
+    console.info(`Found match of dieCodeSymbol (${dieCodeSymbol}) in: ${diceCode}`)
+
+    
+  } else {
+    console.error(`Could not find match of dieCodeSymbol (${dieCodeSymbol}) in: ${diceCode}`)  
+  }
+
+
+  // `respond` is used for actions or commands and uses the `response_url` provided by the
+  // incoming request from Slack
+  msg.respond(`I'll roll dice soon. Just wait.`)
+
+
 })
 
 // Catch-all for any other responses not handled above
