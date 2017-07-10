@@ -133,10 +133,10 @@ slapp.command('/roll', (msg) => {
 
   // we need to assume that any text send after the /roll command is the code used to tell our dice roller what to do.
   // we will parse this out and handle any errors.
-  var diceCode = msg.body.text
+  var diceCode = msg.body.text.toString()
 
   // check for the presence of 'd' or 'D' in the dice code.
-  if (diceCode.toLowercase().indexOf(dieCodeSymbol) != -1) {
+  if (diceCode.toLowerCase().indexOf(dieCodeSymbol) != -1) {
     // [DEBUG] 
     console.info(`Found match of dieCodeSymbol (${dieCodeSymbol}) in: ${diceCode}`)
 
