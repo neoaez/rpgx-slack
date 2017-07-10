@@ -98,11 +98,10 @@ slapp.message(/^(thanks|thank you)/i, ['mention', 'direct_message'], (msg) => {
   ]), 
   DataStore.get('u::c::jenkins', function (err, val) {
     // [TO DO] handle error
-    
-  }),
-  msg.say([
-    `Data retrieved: ${val}`,
-  ])
+    msg.say([
+      `Data retrieved: ${val}`,
+    ])   
+  })
 })
 
 // demonstrate returning an attachment...
