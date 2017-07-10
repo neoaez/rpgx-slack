@@ -5,6 +5,10 @@ const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
 
+// Persist - for data storage
+const DataStore = require('beepboop-persist')()
+
+
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
 
@@ -31,7 +35,10 @@ I will respond to the following messages:
 
 // response to the user typing "help"
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
-  msg.say(HELP_TEXT)
+  msg.say(HELP_TEXT),
+  DataStore.set('u::c::jenkins', { name: 'Jenkins', thumb: 'https://u8921732.dl.dropboxusercontent.com/u/8921732/slack/thumbs/ar_jenkins.png' }, function (err) {
+    // [TO DO] handle error
+  })
 })
 
 // "Conversation" flow that tracks state - kicks off when user says hi, hello or hey
@@ -88,6 +95,13 @@ slapp.message(/^(thanks|thank you)/i, ['mention', 'direct_message'], (msg) => {
     'You bet',
     ':+1: Of course',
     'Anytime :sun_with_face: :full_moon_with_face:'
+  ]), 
+  DataStore.get('u::c::jenkins', function (err, val) {
+    // [TO DO] handle error
+    
+  }),
+  msg.say([
+    `Data retrieved: ${val}`,
   ])
 })
 
