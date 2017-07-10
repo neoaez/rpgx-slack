@@ -129,11 +129,11 @@ slapp.command('/roll', (msg) => {
   const dieCodeSymbol = 'd'
 
   // create a variable to hold the end result of our dice rolling
-  rollResult = null
+  var rollResult = null
 
   // we need to assume that any text send after the /roll command is the code used to tell our dice roller what to do.
   // we will parse this out and handle any errors.
-  diceCode = msg.body.text
+  var diceCode = msg.body.text
 
   // check for the presence of 'd' or 'D' in the dice code.
   if (diceCode.toLowercase().indexOf(dieCodeSymbol) != -1) {
