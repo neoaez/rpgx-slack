@@ -35,7 +35,7 @@ I will respond to the following messages:
 //*********************************************
 // Setup different handlers for messages
 //*********************************************
-require('./events/help.js')(slapp)
+require('./events/help.js')(slapp, HELP_TEXT)
 require('./events/hello.js')(slapp)
 require('./events/thanks.js')(slapp)
 require('./events/attachment.js')(slapp)
