@@ -1,7 +1,7 @@
 
 
 module.exports = (app) => {
-  let slapp = app.slapp
+  let slapp = app
 
   // Can use a regex as well
   slapp.message(/^(thanks|thank you)/i, ['mention', 'direct_message'], (msg) => {

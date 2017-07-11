@@ -1,7 +1,7 @@
 
 
 module.exports = (app) => {
-  let slapp = app.slapp
+  let slapp = app
 
     // "Conversation" flow that tracks state - kicks off when user says hi, hello or hey
   slapp

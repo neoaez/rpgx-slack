@@ -1,7 +1,7 @@
 
 
 module.exports = (app) => {
-  let slapp = app.slapp
+  let slapp = app
 
   // response to the user typing "help"
   slapp.message('help', ['mention', 'direct_message'], (msg) => {
