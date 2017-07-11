@@ -135,12 +135,16 @@ slapp.command('/roll', (msg) => {
   // we will parse this out and handle any errors.
   var diceCode = msg.body.text.toString()
 
+  // [TO DO] strip out any spaces in the diceCode. This will make it easier to check for various options like modifiers.
+  
+
   // check for the presence of 'd' or 'D' in the dice code.
   if (diceCode.toLowerCase().indexOf(dieCodeSymbol) != -1) {
     // [DEBUG] 
     console.info(`Found match of dieCodeSymbol (${dieCodeSymbol}) in: ${diceCode}`)
 
-    
+    //split the diceCode into its components: dieQuantity, dieFaces
+
   } else {
     console.error(`Could not find match of dieCodeSymbol (${dieCodeSymbol}) in: ${diceCode}`)  
   }
