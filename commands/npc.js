@@ -16,6 +16,7 @@ module.exports = (app, text) => {
     if (msg.body.text.indexOf('|') != -1) {
       var commandParameters = msg.body.text.split('|')
       npcName = commandParameters[0]
+      npcThumb = commandParameters[1]
     } else {
       npcName = msg.body.text
     }
