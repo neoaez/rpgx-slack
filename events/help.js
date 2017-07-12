@@ -8,4 +8,5 @@ module.exports = (app, text) => {
   // response to the user typing "help"
   slapp.message('help', ['mention', 'direct_message'], (msg) => {
     msg.say(helpText)
+  })
 }
