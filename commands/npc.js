@@ -27,7 +27,11 @@ module.exports = (app, text) => {
 
           console.info(`Character data loaded. Author: ${jsonData.author}`)
 
-          jsonData.characters.foreach (function(character){
+          console.info(`${jsonData.characters}`)
+
+          var characters = jsonData.characters
+
+          characters.forEach (function(character){
 
             // testing persist data
             kv.set(`${userID}::NPC::${character.name}`, { name: character.name, thumb: character.thumb, color: character.color, sheet_url: character.sheet_url }, function (err) {
