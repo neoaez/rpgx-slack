@@ -1,7 +1,7 @@
 
 
 module.exports = (app, text) => {
-  let slapp = app
+  let slapp = app.slapp
   let helpText = text
 
   // response to the user typing "help"

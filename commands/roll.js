@@ -1,7 +1,7 @@
 
 
 module.exports = (app) => {
-  let slapp = app
+  let slapp = app.slapp
 
   // Slash Command: ... 
   slapp.command('/roll', (msg) => {
