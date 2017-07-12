@@ -1,7 +1,7 @@
 
 
 module.exports = (app) => {
-  let slapp = app
+  let slapp = app.slapp
 
    // demonstrate returning an attachment...
   slapp.message('attachment', ['mention', 'direct_message'], (msg) => {

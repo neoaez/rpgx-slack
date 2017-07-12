@@ -24,6 +24,13 @@ var slapp = Slapp({
 // attach Slapp to express server
 var server = slapp.attachToExpress(express())
 
+// define app variable that will pass around core objects
+var app = {
+  slapp,
+  server,
+  dataStore: DataStore //({ provider: config.persist_provider })
+}
+
 var HELP_TEXT = `
 I will respond to the following messages:
 \`help\` - to see this message.
@@ -37,11 +44,11 @@ I will respond to the following messages:
 //*********************************************
 // Setup different handlers for messages
 //*********************************************
-require('./events/help.js')(slapp, HELP_TEXT)
-require('./events/hello.js')(slapp)
-require('./events/thanks.js')(slapp)
-require('./events/attachment.js')(slapp)
-require('./commands/roll.js')(slapp)
+require('./events/help.js')(app, HELP_TEXT)
+require('./events/hello.js')(app)
+require('./events/thanks.js')(app)
+require('./events/attachment.js')(app)
+require('./commands/roll.js')(app)
 
 // Catch-all for any other responses not handled above
 slapp.message('.*', ['direct_mention', 'direct_message'], (msg) => {
