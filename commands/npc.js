@@ -11,19 +11,18 @@ module.exports = (app, text) => {
     var userID = msg.body.user_id
     console.info(`user: ${userID}`)
    
-    var npcName = "SomeRandomNPCName"
-    var npcThumb = null
-    if (msg.body.text.indexOf('|') != -1) {
-      var commandParameters = msg.body.text.split('|')
-      npcName = commandParameters[0]
-      npcThumb = commandParameters[1]
-    } else {
-      npcName = msg.body.text
-    }
+    var jsonData = msg.body.text
 
-    // testing persist data
-    kv.set(`${userID}::NPC::${npcName}`, { name: npcName, thumb: npcThumb }, function (err) {
-      //[TO DO] handle error
+    // [TO DO] fine a way to safely load JSON data without accidentally processing any functions or malicious code
+
+    console.info(`Character data loaded. Author: ${jsonData.author}`)
+    
+    jsonData.characters.foreach (function(character){
+
+      // testing persist data
+      kv.set(`${userID}::NPC::${character.name}`, { name: character.name, thumb: character.thumb, color: character.color, sheet_url: character.sheet_url }, function (err) {
+        //[TO DO] handle error
+      })
     })
   })
 }
