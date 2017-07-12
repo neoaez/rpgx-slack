@@ -8,16 +8,16 @@ module.exports = (app, text) => {
   // Slash Command: ... 
   slapp.command('/npc', (msg) => {
 
-    var userID = msg.body.event.user
+    var userID = msg.body.user_id
     console.info(`user: ${userID}`)
    
     var npcName = "SomeRandomNPCName"
     var npcThumb = null
-    if (msg.body.event.text.indexOf('|') != -1) {
-      var commandParameters = msg.body.event.text.split('|')
+    if (msg.body.text.indexOf('|') != -1) {
+      var commandParameters = msg.body.text.split('|')
       npcName = commandParameters[0]
     } else {
-      npcName = msg.body.event.text
+      npcName = msg.body.text
     }
 
     // testing persist data
