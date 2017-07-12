@@ -26,16 +26,20 @@ module.exports = (app, text) => {
 
       //testing persist data
       kv.get(`${userID}::NPC::${npcName}`, function (err, val) {
+        var npcThumb = ""
         if (!err) {
+          if (val.name) {
+            npcThumb = val.thumb
+          } 
           msg.say({
             //response_type: 'in_channel',
             text: '',
             attachments: [{
               text: `${npcText}`,
-              title: `${val.name}`,
+              title: `${npcName}`,
               color: "#4bbff4",
               mrkdwn_in: ["text", "pretext"],
-              thumb_url: `${val.thumb}`
+              thumb_url: `${npcThumb}`
             }]
           })
         } else {
