@@ -28,7 +28,7 @@ module.exports = (app, text) => {
       kv.get(`${userID}::NPC::${npcName}`, function (err, val) {
         var npcThumb = ""
         if (!err) {
-          if (val.name) {
+          if (val) {
             npcThumb = val.thumb
           } 
           msg.say({
