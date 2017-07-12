@@ -28,7 +28,7 @@ var server = slapp.attachToExpress(express())
 var app = {
   slapp,
   server,
-  dataStore: DataStore({ provider: config.persist_provider })
+  dataStore: DataStore //({ provider: config.persist_provider })
 }
 
 var HELP_TEXT = `
