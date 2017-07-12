@@ -12,14 +12,6 @@ module.exports = (app) => {
       'You bet',
       ':+1: Of course',
       'Anytime :sun_with_face: :full_moon_with_face:'
-    ])//, 
-
-    // testing persist data
-    //DataStore.get('u::c::jenkins', function (err, val) {
-      // [TO DO] handle error
-      //msg.say([
-        //`Data retrieved: ${val.thumb}`,
-      //])   
-    //})
+    ])
   })
 }
