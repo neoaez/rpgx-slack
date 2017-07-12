@@ -22,23 +22,36 @@ module.exports = (app, text) => {
         npcText = msg.body.text
     }
 
-    //testing persist data
-    kv.get(`${userID}::NPC::${npcName}`, function (err, val) {
-      // [TO DO] handle error
-      msg.say({
-        //response_type: 'in_channel',
-        text: '',
-        attachments: [{
-          text: `${npcText}`,
-          title: `${val.name}`,
-          //image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
-          //title_link: 'https://beepboophq.com/',
-          //color: '#7CD197'
-          color: "#4bbff4",
-          mrkdwn_in: ["text", "pretext"],
-          thumb_url: `${val.thumb}`
-        }]
-      })   
-    })
+    if (npcName) {
+
+      //testing persist data
+      kv.get(`${userID}::NPC::${npcName}`, function (err, val) {
+        if (!err) {
+          msg.say({
+            //response_type: 'in_channel',
+            text: '',
+            attachments: [{
+              text: `${npcText}`,
+              title: `${val.name}`,
+              color: "#4bbff4",
+              mrkdwn_in: ["text", "pretext"],
+              thumb_url: `${val.thumb}`
+            }]
+          })
+        } else {
+          // [TO DO] handle error
+        }   
+      })
+    } else {
+        msg.say({
+          //response_type: 'in_channel',
+          text: '',
+          attachments: [{
+            text: `${npcText}`,
+            color: "#4bbff4",
+            mrkdwn_in: ["text", "pretext"],
+          }]
+        })          
+    }
   })
 }
