@@ -27,7 +27,7 @@ module.exports = (app, text) => {
       // [TO DO] handle error
       msg.say({
         //response_type: 'in_channel',
-        //text: 'Check out this amazing attachment! :confetti_ball: ',
+        text: '',
         attachments: [{
           text: `${npcText}`,
           title: `${val.name}`,
