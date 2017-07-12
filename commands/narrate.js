@@ -33,6 +33,8 @@ module.exports = (app, text) => {
           } 
           msg.say({
             //response_type: 'in_channel',
+            name: 'SomeRandomName',
+            icon_url: npcThumb,
             text: '',
             attachments: [{
               text: `${npcText}`,
