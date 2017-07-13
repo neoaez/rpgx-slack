@@ -1,6 +1,6 @@
 'use strict'
 
-var roller = require('../lib/node-roll-master/bin/roll')
+//var roller = require('../lib/node-roll-master/bin/roll')
 
 
 module.exports = (app) => {
@@ -10,12 +10,12 @@ module.exports = (app) => {
   slapp.command('/roll', (msg) => {
 
     var diceCode = msg.body.text.toString()
-    diceRoll = roller.roll(diceCode)
+    //var diceRoll = roller.roll(diceCode)
 
 
     // `respond` is used for actions or commands and uses the `response_url` provided by the
     // incoming request from Slack
-    msg.respond(`roll: ${diceRoll.result}`)
+    msg.respond(`code: ${diceCode}`)
 
   })
 
