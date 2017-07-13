@@ -1,5 +1,5 @@
 
-var request = require("request")
+var request = require('request')
 
 module.exports = (app, text) => {
   let slapp = app.slapp
