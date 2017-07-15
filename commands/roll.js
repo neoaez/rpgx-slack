@@ -78,7 +78,7 @@ module.exports = (app) => {
     for (var i = 0; i < rolls.length; i++) {
 
       // [DEBUG]  
-      console.log(`roll: ${roll[i]}`)
+      console.log(`roll: ${rolls[i]}`)
 
       var dice = command.match(diceRegExp)
       var quantity = 1
