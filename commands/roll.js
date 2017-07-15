@@ -3,20 +3,166 @@
 //var roller = require('../lib/node-roll-master/bin/roll')
 
 
+/** [TO DO] create rollers for:
+ * 
+ * Cortex (multiple pools of die types; highlight best X results - usually 2)
+ * Infinity (opposed roll under target # and closest to target # wins; critical if exactly target #)
+ * Fate (special die type)
+ * 
+ */
+
+ /** Example dice codes
+  *  ==================
+  * 
+  * 3d6,2d8 ...........roll 2 pools of dice and return results
+  * 8d10t>8s3..........roll 1 pool of dice and tell me if I get at least 3 dice showing an 8 or higher; return results
+  * 7d6s2t>4!..........roll 1 pool of dice and tell me if I get at least 2 dice showing a 4 or higher; explode any dice that roll a 6; return results
+  * 5d6b2..............roll 1 pool of dice and highlight the best 2 results
+  * 4d6b3=.............roll 4 dice; keep the best 3 and total them
+  */
+
 module.exports = (app) => {
   let slapp = app.slapp
+
+  //const fullDiceRegExp = /(\d*)([d](\d*)([+|-|*|/](\d*)))+/ig
+  const diceRegExp = /((\d*)[d](\d*))+/i
+  const bestOrWorstResultsRegExp = /([b|w](\d*))+/i
+  const successRegExp = /([s](\d*))+/i
+  const targetRegExp = /([>|<](\d*))+/i
+  const addModifierRegExp = /([+](\d*))+/ig
+  const subtractModifierRegExp = /([-](\d*))+/ig
+  const multiplyModifierRegExp = /([*](\d*))+/ig
+  const divideModifierRegExp = /([/](\d*))+/ig
+
+  const multiplePoolsSeparator = ','
+  const explodeSymbol = '!'
+  const sumResultsSymbol = '='
+  const HighlightNoResults = 0
+  const HighlightBestResults = 1
+  const HighlightWorstResults = 2
 
   // Slash Command: ... 
   slapp.command('/roll', (msg) => {
 
-    var diceCode = msg.body.text.toString()
-    //var diceRoll = roller.roll(diceCode)
+    var command = msg.body.text.toString()
+    var results = null
+    var rolls = null
+    /*
+    rolls = {
+      {
+        dice: '10d6',
+        mods: ['+5'],
+        successes: '2',
+        target: '>4',
+        results: [1,1,1,1,1,1,1,1,1,1],
+        rolltotal: 10,
+        modtotal: 15,
+        verdict: 'success'
+      },
+      {
+
+      }
+    }
+
+    */
+
+    // Get what dice pools we are rolling
+    if (command.indexOf(multiplePoolsSeparator)) {
+      rolls  = command.split(multiplePoolsSeparator)
+    } else {
+      rolls = command
+    }
+    // [TO DO] add error handling. If there are no dice to roll then we need to give feedback to the user and exit
+
+    //
+    for (var i = 0; i < rolls.length; i++) {
+
+      // [DEBUG]  
+      console.log(`roll: ${roll[i]}`)
+
+      var dice = command.match(diceRegExp)
+      var quantity = 1
+      var faces = 6
+      if (dice) {
+        quantity = dice.match(/(\d*)+[d]/i)
+        if (quantity) { quantity = quantity.match(/[(\d*)]+/) }
+        faces = dice.match(/[d](\d*)+/i)
+        if (faces) { faces = faces.match(/[(\d*)]+/) }
+      }
+
+      // See if we are using the Target number option
+      var target = command.match(targetRegExp)
+      if (target) { target = target.match(/[(\d*)]+/) }
+
+      // See if we are using the Successes required option
+      var successesRequired = command.match(successRegExp)
+      if (successesRequired) { successesRequired = successesRequired.match(/[(\d*)]+/) }
+
+      var modifiers = command.match(modifierRegExp)
+
+      var resultsToHighlight = command.match(bestOrWorstResultsRegExp)
+      var highlightType = HighlightNoResults
+      if (resultsToHighlight) { 
+        if (resultsToHighlight.match(/[b]/i)) {
+          highlightType = HighlightBestResults
+        } else if (resultsToHighlight.match(/[w]/i)) {
+          highlightType = HighlightWorstResults
+        }
+      }
+
+      var bTotalResults = false
+      if (command.indexOf(sumResultsSymbol) != -1) { bTotalResults = true }
+
+      results.push(diceRoll(quantity, faces, target, modifier, successesRequired, bTotalResults))
+
+      // [DEBUG]
+      console.info(`[DEBUG] results: ${results}`)
+    }
 
 
     // `respond` is used for actions or commands and uses the `response_url` provided by the
     // incoming request from Slack
-    msg.respond(`code: ${diceCode}`)
+    msg.respond(`code: ${command}`)
+
+    msg.respond(`results: ${results}`)
 
   })
+
+  diceRoll = function (quantity, faces, target, modifiers, successesRequired, bTotalResults) {
+    var poolResults = {
+      quantity: quantity,
+      faces: faces,
+      modifiers: modifiers,
+      target: target,
+      successesRequired: successesRequired,
+      total: 0,
+      rolls: null
+    }
+
+    var modifier = 0
+    if (modifiers) {
+      for (j = 0; j < modifiers.length; j++) {
+        modifier += modifiers[j].parseInt
+      }
+    }
+
+    var rollResults = null
+
+    for (i = 0; i < quantity; i++) {
+      rollResults.push(Math.floor(Math.random() * faces) + 1)
+    }
+
+    /** [TO DO] 
+     * 
+     * sum total; if required
+     * get best or worst results; if required
+     * 
+    */
+
+    poolResults.rolls = rollResults
+
+    return poolResults
+  }
+  
 
 }
