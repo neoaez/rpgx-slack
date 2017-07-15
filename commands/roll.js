@@ -128,7 +128,7 @@ module.exports = (app) => {
 
   })
 
-  diceRoll = function (quantity, faces, target, modifiers, successesRequired, bTotalResults) {
+  var diceRoll = function (quantity, faces, target, modifiers, successesRequired, bTotalResults) {
     var poolResults = {
       quantity: quantity,
       faces: faces,
