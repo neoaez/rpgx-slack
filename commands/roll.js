@@ -348,7 +348,7 @@ module.exports = (app) => {
 
                     callback_id: 'rollDetails_callback',
 
-  slapp.action('rollDetails_callback', 'displayRollDetails', 'SHOW_DETAILS', (msg, val) => {
+  slapp.action('rollDetails_callback', 'rollDetails', 'SHOW_DETAILS', (msg, val) => {
     console.info(`[DEBUG] SHOW_DETAILS action caught...`)
   })
 }
