@@ -228,7 +228,19 @@ module.exports = (app) => {
             title: `${diceRollerName} rolled:`,
             color: `${diceRollerColor}`,
             mrkdwn_in: ["text", "pretext"],
-            thumb_url: `${diceRollIcon}`
+            thumb_url: `${diceRollIcon}`,
+
+            actions: [
+                {
+                    name: 'rollDetails',
+                    text: 'Details',
+                    type: 'button',
+                    value: 'SHOW_DETAILS'
+                }
+            ]
+
+
+
           }]
         })
       }
