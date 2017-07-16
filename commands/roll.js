@@ -31,7 +31,7 @@ module.exports = (app) => {
   const bestOrWorstResultsRegExp = /([b w](\d{1,}))/i
   const successRegExp = /(s\d{1,})/i
   const targetRegExp = /(t[><](\d{1,}))/i
-  const modifierRegExp = /([ \+ \- \* \/ ](\d{1,}))/ig
+  const modifierRegExp = /([ \+ \- \* \/ ]\d{1,})/ig
   const addModifierRegExp = /(\+\d{1,})/ig
   const subtractModifierRegExp = /(\-\d{1,})/ig
   const multiplyModifierRegExp = /(\*\d{1,})/ig
@@ -373,7 +373,6 @@ module.exports = (app) => {
                 value: 'SHOW_SUMMARY'
             }
         ]
-
       }]
     })
 
