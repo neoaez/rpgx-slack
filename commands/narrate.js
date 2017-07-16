@@ -8,14 +8,17 @@ module.exports = (app, text) => {
   // Slash Command: ... 
   slapp.command('/narrate', (msg) => {
 
+    const contextSymbol = ':'
+
     var userID = msg.body.user_id
     console.info(`user: ${userID}`)
    
     var npcName = null
     var npcText = null
+    var npcThumb = ''
 
-    if (msg.body.text.indexOf('|') != -1) {
-      var commandParameters = msg.body.text.split('|')
+    if (msg.body.text.indexOf(contextSymbol) != -1) {
+      var commandParameters = msg.body.text.split(contextSymbol)
       npcName = commandParameters[0]
       npcText = commandParameters[1]
     } else {
@@ -24,9 +27,8 @@ module.exports = (app, text) => {
 
     if (npcName) {
 
-      //testing persist data
+      // retrieve npc data if it exists
       kv.get(`${userID}::NPC::${npcName}`, function (err, val) {
-        var npcThumb = ""
         if (!err) {
           if (val) {
             npcThumb = val.thumb

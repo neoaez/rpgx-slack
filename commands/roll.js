@@ -23,6 +23,7 @@
 
 module.exports = (app) => {
   let slapp = app.slapp
+  let kv = app.dataStore
 
   //const fullDiceRegExp = /(\d*)([d](\d*)([\+|\-|\*|\/](\d*)))+/ig
   const diceRegExp = /((\d*)[d](\d*))+/i
@@ -41,32 +42,53 @@ module.exports = (app) => {
   const HighlightNoResults = 0
   const HighlightBestResults = 1
   const HighlightWorstResults = 2
+  const contextSymbol = ':'
 
+  const MessageContextUser = 0
+  const MessageContextCharacter = 1
+ 
+  const diceRollIcon = 'https://d30y9cdsu7xlg0.cloudfront.net/png/10617-200.png'
   const diceRollMessageColor = '#ffb84d'
 
   // Slash Command: ... 
   slapp.command('/roll', (msg) => {
 
+    var messageContext = MessageContextUser
     var commandParameters = null
     var command = null
 
     var results = []
     var rolls = []
 
-    var nameOfDiceRoller = msg.body.user_name
-
+    var diceRollerName = msg.body.user_name
+    var diceRollerThumb = diceRollIcon
+    var diceRollerColor = diceRollMessageColor
 
     //    /(\w*)+[\|]/i
 
-    if (msg.body.text.indexOf('|') != -1) {
-      commandParameters = msg.body.text.split('|')
-      nameOfDiceRoller = commandParameters[0]
+    if (msg.body.text.indexOf(contextSymbol) != -1) {
+      commandParameters = msg.body.text.split(contextSymbol)
+      diceRollerName = commandParameters[0]
       command = commandParameters[1]
+      messageContext = MessageContextCharacter
     } else {
       command = msg.body.text
     }
 
 
+    if(messageContext == MessageContextCharacter) {
+      // retrieve npc data if it exists
+      kv.get(`${msg.body.user_id}::NPC::${diceRollerName}`, function (err, val) {
+
+        if (!err) {
+          if (val) {
+            diceRollerThumb = val.thumb
+            diceRollerColor = val.color
+          }  
+        } else {
+            // [TO DO] handle error
+        }     
+    }
 
     /*
     rolls = {
@@ -159,10 +181,6 @@ module.exports = (app) => {
 
       // [DEBUG]
       //console.info(`[DEBUG] results: ${results}`)
-    
-      // `respond` is used for actions or commands and uses the `response_url` provided by the
-      // incoming request from Slack
-      //msg.respond(`code: ${rolls[i]}`)
     }
 
 
@@ -173,14 +191,14 @@ module.exports = (app) => {
         msg.say({
           response_type: 'in_channel',
           username: `RpgXDice   (@${msg.body.user_name})`,
-          icon_url: 'https://d30y9cdsu7xlg0.cloudfront.net/png/10617-200.png',
+          icon_url: diceRollerThumb,
           text: '',
           attachments: [{
             text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
-            title: `${nameOfDiceRoller} rolled:`,
-            color: diceRollMessageColor,
+            title: `${diceRollerName} rolled:`,
+            color: diceRollerColor,
             mrkdwn_in: ["text", "pretext"],
-            //thumb_url: `${npcThumb}`
+            thumb_url: `${diceRollIcon}`
           }]
         })
 
