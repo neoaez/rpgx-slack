@@ -208,9 +208,6 @@ module.exports = (app) => {
                 }]
               })
 
-
-              //.thread()
-
               .say({
                 response_type: 'in_channel',
                 username: `${username}   (@${msg.body.user_name})`,
@@ -218,18 +215,12 @@ module.exports = (app) => {
                 text: '',
                 attachments: [{
                 text: 
-                  `Dice: ${results[k].quantity}d${results[k].faces}\n
-                  Modifiers: ${results[k].modifiers} (*${results[k].modifier}*)\n
-                  Roll(s): [${results[k].rolls}]\n 
-                  Roll Total: ${results[k].total} (*${results[k].modifiedTotal}*)`,                  
+                  `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)\n-----------------\nDice: ${results[k].quantity}d${results[k].faces}\nModifiers: ${results[k].modifiers} (*${results[k].modifier}*)\nRoll(s): [${results[k].rolls}]\nRoll Total: ${results[k].total} (*${results[k].modifiedTotal}*)`,                  
                   color: `${diceRollerColor}`,
                   mrkdwn_in: ["text", "pretext"],
                   thumb_url: `${diceRollIcon}`
                 }]
-              })
-              
-
-              //.unthread()
+              })              
             }
           }  else {
             console.error(`[ERROR] no value for [${msg.body.user_id}::NPC::${diceRollerName}]`)
@@ -271,9 +262,6 @@ module.exports = (app) => {
           }]
         })
 
-        // thread the next message containing the detailed output for the requested roll
-        //.thread()
-
         // roll details message 
         .say({
           response_type: 'in_channel',
@@ -282,10 +270,10 @@ module.exports = (app) => {
           text: '',
           attachments: [{
             text: 
-              `Dice: ${results[k].quantity}d${results[k].faces}\n
-              Modifiers: ${results[k].modifiers} (*${results[k].modifier}*)\n
-              Roll(s): [${results[k].rolls}]\n 
-              Roll Total: ${results[k].total} (*${results[k].modifiedTotal}*)`,
+                  `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)\n-----------------\nDice: ${results[k].quantity}d${results[k].faces}\nModifiers: ${results[k].modifiers} (*${results[k].modifier}*)\nRoll(s): [${results[k].rolls}]\nRoll Total: ${results[k].total} (*${results[k].modifiedTotal}*)`,                  
+                  color: `${diceRollerColor}`,
+                  mrkdwn_in: ["text", "pretext"],
+                  thumb_url: `${diceRollIcon}`
             title: `${diceRollerName} rolled:`,
             color: `${diceRollerColor}`,
             mrkdwn_in: ["text", "pretext"],
