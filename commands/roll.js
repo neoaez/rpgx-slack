@@ -198,7 +198,7 @@ module.exports = (app) => {
                   mrkdwn_in: ["text", "pretext"],
                   thumb_url: `${diceRollIcon}`,
 
-                  callback_id: 'rollDetails_callback_id',
+                  callback_id: 'rollDetails_callback',
                   actions: [
                       {
                           name: 'rollDetails',
@@ -241,6 +241,7 @@ module.exports = (app) => {
             mrkdwn_in: ["text", "pretext"],
             thumb_url: `${diceRollIcon}`,
 
+            callback_id: 'rollDetails_callback',
             actions: [
                 {
                     name: 'rollDetails',
@@ -343,4 +344,11 @@ module.exports = (app) => {
 
     return poolResults
   }
+
+
+                    callback_id: 'rollDetails_callback',
+
+  slapp.action('rollDetails_callback', 'displayRollDetails', 'SHOW_DETAILS', (msg, val) => {
+    console.info(`[DEBUG] SHOW_DETAILS action caught...`)
+  })
 }
