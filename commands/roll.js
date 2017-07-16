@@ -87,7 +87,8 @@ module.exports = (app) => {
           }  
         } else {
             // [TO DO] handle error
-        }     
+        }    
+      })
     }
 
     /*
