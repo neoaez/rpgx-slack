@@ -40,7 +40,7 @@ module.exports = (app, text) => {
             attachments: [{
               text: `${npcText}`,
               //title: `${npcName}`,
-              color: "#4bbff4",
+              color: `${npcColor}`,
               mrkdwn_in: ["text", "pretext"],
               //thumb_url: `${npcThumb}`
             }]
@@ -51,7 +51,7 @@ module.exports = (app, text) => {
       })
     } else {
         msg.say({
-          //response_type: 'in_channel',
+          response_type: 'in_channel',
           text: '',
           attachments: [{
             text: `${npcText}`,
