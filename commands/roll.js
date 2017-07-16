@@ -143,9 +143,9 @@ module.exports = (app) => {
       var resultsToHighlight = rolls[i].match(bestOrWorstResultsRegExp)
       var highlightType = HighlightNoResults
       if (resultsToHighlight) { 
-        if (resultsToHighlight[0].match(/[b]/i)) {
+        if (resultsToHighlight[0].match(/(b)/i)) {
           highlightType = HighlightBestResults
-        } else if (resultsToHighlight[0].match(/[w]/i)) {
+        } else if (resultsToHighlight[0].match(/(w)/i)) {
           highlightType = HighlightWorstResults
         }
       }
@@ -153,7 +153,9 @@ module.exports = (app) => {
       var bTotalResults = false
       if (rolls[i].indexOf(sumResultsSymbol) != -1) { bTotalResults = true }
 
-      results.push(diceRoll(quantity, faces, target, modifiers, successesRequired, bTotalResults))
+      if (quantity > 0 && faces > 0) {
+        results.push(diceRoll(quantity, faces, target, modifiers, successesRequired, bTotalResults))
+      }
     }
 
 
