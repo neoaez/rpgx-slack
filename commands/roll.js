@@ -147,9 +147,9 @@ module.exports = (app) => {
     var modifier = 0
     if (modifiers) {
       for (var j = 0; j < modifiers.length; j++) {
-        modifier += modifiers[j].parseInt()
+        modifier += parseInt(modifiers[j])
         // [DEBUG]
-        console.info(`[DEBUG] modifier: ${modifiers[j].parseInt()}`)      }
+        console.info(`[DEBUG] modifier: ${parseInt(modifiers[j])}`)      }
     }
 
     // [DEBUG]
