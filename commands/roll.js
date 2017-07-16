@@ -196,15 +196,7 @@ module.exports = (app) => {
                   //title: `${diceRollerName} rolled:`,
                   color: `${diceRollerColor}`,
                   mrkdwn_in: ["text", "pretext"],
-                  thumb_url: `${diceRollIcon}`,
-
-                  callback_id: 'rollDetails_callback',
-                  actions: [{
-                    name: 'rollDetails',
-                    text: 'Details',
-                    type: 'button',
-                    value: 'SHOW_DETAILS'
-                  }]
+                  thumb_url: `${diceRollIcon}`
                 }]
               })
 
@@ -250,15 +242,7 @@ module.exports = (app) => {
             title: `${diceRollerName} rolled:`,
             color: `${diceRollerColor}`,
             mrkdwn_in: ["text", "pretext"],
-            thumb_url: `${diceRollIcon}`,
-
-            callback_id: 'rollDetails_callback',
-            actions: [{
-              name: 'rollDetails',
-              text: 'Details',
-              type: 'button',
-              value: 'SHOW_DETAILS'
-            }]
+            thumb_url: `${diceRollIcon}`
           }]
         })
 
@@ -270,10 +254,10 @@ module.exports = (app) => {
           text: '',
           attachments: [{
             text: 
-                  `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)\n-----------------\nDice: ${results[k].quantity}d${results[k].faces}\nModifiers: ${results[k].modifiers} (*${results[k].modifier}*)\nRoll(s): [${results[k].rolls}]\nRoll Total: ${results[k].total} (*${results[k].modifiedTotal}*)`,                  
+                  `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)\n-----------------\nDice: ${results[k].quantity}d${results[k].faces}\nModifiers: ${results[k].modifiers} (*${results[k].modifier}*)\nRoll(s): [${results[k].rolls}]\nRoll Total: ${results[k].total} (*${results[k].modifiedTotal}*)`,
                   color: `${diceRollerColor}`,
                   mrkdwn_in: ["text", "pretext"],
-                  thumb_url: `${diceRollIcon}`
+                  thumb_url: `${diceRollIcon}`,
             title: `${diceRollerName} rolled:`,
             color: `${diceRollerColor}`,
             mrkdwn_in: ["text", "pretext"],
