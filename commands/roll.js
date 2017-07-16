@@ -105,9 +105,9 @@ module.exports = (app) => {
       var diceArray = rolls[i].match(diceRegExp)
       var dice = "1d6"
       var quantityArray = null
-      var quantity = 1
+      var quantity = 0
       var facesArray = null
-      var faces = 6
+      var faces = 0
       
       // [DEBUG]
       console.info(`[DEBUG] diceArray: ${diceArray}`)
@@ -116,11 +116,11 @@ module.exports = (app) => {
         // [DEBUG]
         console.info(`[DEBUG] diceArray has value...`)
         
-        quantityArray = diceArray[0].match(/^(\d*d)/i)
+        quantityArray = diceArray[0].match(/^(\d{1,}d)/i)
         if (quantityArray) { 
           // [DEBUG]
           console.info(`[DEBUG] quantityArray has value...`)
-          quantity = quantityArray[0].match(/^(\d*)/)[0] 
+          quantity = quantityArray[0].match(/^(\d{1,})/)[0] 
         }
         facesArray = diceArray[0].match(/(d\d{1,})/i)
         if (facesArray) { 
