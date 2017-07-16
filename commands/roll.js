@@ -346,9 +346,66 @@ module.exports = (app) => {
   }
 
 
-                    callback_id: 'rollDetails_callback',
+//                    callback_id: 'rollDetails_callback',
 
   slapp.action('rollDetails_callback', 'rollDetails', 'SHOW_DETAILS', (msg, val) => {
     console.info(`[DEBUG] SHOW_DETAILS action caught...`)
+    
+    msg.say({
+      response_type: 'in_channel',
+      username: msg.body.original_message.username,
+      icon_url: msg.body.original_message.icon_url,
+      text: msg.body.original_message.text,
+      attachments: [{
+        text: msg.body.original_message.attachments[0].text
+        //title: `${diceRollerName} rolled:`,
+        color: msg.body.original_message.attachments[0].color,
+        mrkdwn_in:  msg.body.original_message.attachments[0].mrdwn_in,
+        thumb_url:  msg.body.original_message.attachments[0].thumb_url,
+
+        callback_id: 'rollDetails_callback',
+        actions: [
+            {
+                name: 'rollDetails',
+                text: 'Summary',
+                type: 'button',
+                value: 'SHOW_SUMMARY'
+            }
+        ]
+
+      }]
+    })
+
   })
+
+
+  slapp.action('rollDetails_callback', 'rollDetails', 'SHOW_SUMMARY', (msg, val) => {
+    console.info(`[DEBUG] SHOW_SUMMARY action caught...`)
+    
+    msg.say({
+      response_type: 'in_channel',
+      username: msg.body.original_message.username,
+      icon_url: msg.body.original_message.icon_url,
+      text: msg.body.original_message.text,
+      attachments: [{
+        text: msg.body.original_message.attachments[0].text
+        //title: `${diceRollerName} rolled:`,
+        color: msg.body.original_message.attachments[0].color,
+        mrkdwn_in:  msg.body.original_message.attachments[0].mrdwn_in,
+        thumb_url:  msg.body.original_message.attachments[0].thumb_url,
+
+        callback_id: 'rollDetails_callback',
+        actions: [
+            {
+                name: 'rollDetails',
+                text: 'Details',
+                type: 'button',
+                value: 'SHOW_DETAILS'
+            }
+        ]
+
+      }]
+    })
+
+  })  
 }
