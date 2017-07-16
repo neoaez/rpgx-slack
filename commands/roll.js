@@ -70,7 +70,7 @@ module.exports = (app) => {
 
     if (msg.body.text.indexOf(contextSymbol) != -1) {
       commandParameters = msg.body.text.split(contextSymbol)
-      diceRollUser = commandParameters[0]
+      username = commandParameters[0]
       diceRollerName = commandParameters[0]
       command = commandParameters[1]
       messageContext = MessageContextCharacter
@@ -210,7 +210,7 @@ module.exports = (app) => {
     
         msg.say({
           response_type: 'in_channel',
-          username: `${diceRollUser}   (@${msg.body.user_name})`,
+          username: `${username}   (@${msg.body.user_name})`,
           icon_url: diceRollerThumb,
           text: '',
           attachments: [{
