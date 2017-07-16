@@ -73,6 +73,9 @@ module.exports = (app) => {
     } else {
       rolls.push(command)
     }
+
+    // [DEBUG]
+    console.info(`[DEBUG] rolls: ${rolls}`)
     // [TO DO] add error handling. If there are no dice to roll then we need to give feedback to the user and exit
 
     //
@@ -87,6 +90,10 @@ module.exports = (app) => {
       var quantity = 1
       var facesArray = null
       var faces = 6
+      
+      // [DEBUG]
+      console.info(`[DEBUG] diceArray: ${diceArray}`)
+      
       if (diceArray) {
         quantityArray = diceArray[0].match(/(\d*)+[d]/i)
         if (quantityArray) { quantity = quantityArray[0].match(/[(\d*)]+/)[0] }
@@ -95,16 +102,16 @@ module.exports = (app) => {
       }
 
       // See if we are using the Target number option
-      var target = command.match(targetRegExp)
+      var target = rolls[i].match(targetRegExp)
       if (target) { target = target[0].match(/[(\d*)]+/)[0] }
 
       // See if we are using the Successes required option
-      var successesRequired = command.match(successRegExp)
+      var successesRequired = rolls[i].match(successRegExp)
       if (successesRequired) { successesRequired = successesRequired[0].match(/[(\d*)]+/)[0] }
 
-      var modifiers = command.match(modifierRegExp)
+      var modifiers = rolls[i].match(modifierRegExp)
 
-      var resultsToHighlight = command.match(bestOrWorstResultsRegExp)
+      var resultsToHighlight = rolls[i].match(bestOrWorstResultsRegExp)
       var highlightType = HighlightNoResults
       if (resultsToHighlight) { 
         if (resultsToHighlight[0].match(/[b]/i)) {
@@ -115,7 +122,7 @@ module.exports = (app) => {
       }
 
       var bTotalResults = false
-      if (command.indexOf(sumResultsSymbol) != -1) { bTotalResults = true }
+      if (rolls[i].indexOf(sumResultsSymbol) != -1) { bTotalResults = true }
 
       results.push(diceRoll(quantity, faces, target, modifiers, successesRequired, bTotalResults))
 
@@ -126,7 +133,7 @@ module.exports = (app) => {
 
     // `respond` is used for actions or commands and uses the `response_url` provided by the
     // incoming request from Slack
-    msg.respond(`code: ${command}`)
+    msg.respond(`code: ${rolls[i]}`)
 
     for (var k = 0; k < results.length; k++) {
       msg.respond(`rolled: [${results[0].rolls}] (*${results[0].modifiedTotal}*)`)
