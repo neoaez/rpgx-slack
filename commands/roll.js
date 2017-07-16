@@ -351,7 +351,7 @@ module.exports = (app) => {
   slapp.action('rollDetails_callback', 'rollDetails', 'SHOW_DETAILS', (msg, val) => {
     console.info(`[DEBUG] SHOW_DETAILS action caught...`)
     
-    msg.say({
+    msg.respond({
       replace_original: true,
       response_type: 'in_channel',
       username: msg.body.original_message.username,
@@ -361,8 +361,8 @@ module.exports = (app) => {
         text: msg.body.original_message.attachments[0].text,
         //title: `${diceRollerName} rolled:`,
         color: msg.body.original_message.attachments[0].color,
-        mrkdwn_in:  msg.body.original_message.attachments[0].mrdwn_in,
-        thumb_url:  msg.body.original_message.attachments[0].thumb_url,
+        mrkdwn_in: ["text", "pretext"],
+        thumb_url: `${diceRollIcon}`,
 
         callback_id: 'rollDetails_callback',
         actions: [
@@ -383,7 +383,7 @@ module.exports = (app) => {
   slapp.action('rollDetails_callback', 'rollDetails', 'SHOW_SUMMARY', (msg, val) => {
     console.info(`[DEBUG] SHOW_SUMMARY action caught...`)
     
-    msg.say({
+    msg.respond({
       replace_original: true,      
       response_type: 'in_channel',
       username: msg.body.original_message.username,
@@ -393,8 +393,8 @@ module.exports = (app) => {
         text: msg.body.original_message.attachments[0].text,
         //title: `${diceRollerName} rolled:`,
         color: msg.body.original_message.attachments[0].color,
-        mrkdwn_in:  msg.body.original_message.attachments[0].mrdwn_in,
-        thumb_url:  msg.body.original_message.attachments[0].thumb_url,
+        mrkdwn_in: ["text", "pretext"],
+        thumb_url: `${diceRollIcon}`,
 
         callback_id: 'rollDetails_callback',
         actions: [
