@@ -49,6 +49,7 @@ module.exports = (app) => {
  
   const diceRollIcon = 'https://d30y9cdsu7xlg0.cloudfront.net/png/10617-200.png'
   const diceRollMessageColor = '#ffb84d'
+  const diceRollUser = 'RpgXDice'
 
   // Slash Command: ... 
   slapp.command('/roll', (msg) => {
@@ -60,6 +61,7 @@ module.exports = (app) => {
     var results = []
     var rolls = []
 
+    var username = diceRollUser
     var diceRollerName = msg.body.user_name
     var diceRollerThumb = diceRollIcon
     var diceRollerColor = diceRollMessageColor
@@ -68,6 +70,7 @@ module.exports = (app) => {
 
     if (msg.body.text.indexOf(contextSymbol) != -1) {
       commandParameters = msg.body.text.split(contextSymbol)
+      diceRollUser = commandParameters[0]
       diceRollerName = commandParameters[0]
       command = commandParameters[1]
       messageContext = MessageContextCharacter
@@ -91,6 +94,9 @@ module.exports = (app) => {
           if (val) {
             diceRollerThumb = val.thumb
             diceRollerColor = val.color
+
+            // [DEBUG]
+            console.info(`thumb: ${val.thumb}| color: ${val.color}`)
           }  else {
             console.error(`[ERROR] no value for [${msg.body.user_id}::NPC::${diceRollerName}]`)
           }
@@ -204,7 +210,7 @@ module.exports = (app) => {
     
         msg.say({
           response_type: 'in_channel',
-          username: `RpgXDice   (@${msg.body.user_name})`,
+          username: `${diceRollUser}   (@${msg.body.user_name})`,
           icon_url: diceRollerThumb,
           text: '',
           attachments: [{
