@@ -75,8 +75,15 @@ module.exports = (app) => {
       command = msg.body.text
     }
 
+    // [DEBUG]
+      console.info(`[DEBUG] message context: ${messageContext}`)
+
 
     if(messageContext == MessageContextCharacter) {
+
+      // [DEBUG]
+      console.info(`[DEBUG] message context is CHARACTER`)
+
       // retrieve npc data if it exists
       kv.get(`${msg.body.user_id}::NPC::${diceRollerName}`, function (err, val) {
 
@@ -90,6 +97,9 @@ module.exports = (app) => {
             console.error(`[ERROR] error retrieving data for [${msg.body.user_id}::NPC::${diceRollerName}]`)
         }    
       })
+    } else { 
+      // [DEBUG]
+      console.info(`[DEBUG] message context is USER`)
     }
 
     /*
