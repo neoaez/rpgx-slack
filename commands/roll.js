@@ -42,8 +42,22 @@ module.exports = (app) => {
   const HighlightBestResults = 1
   const HighlightWorstResults = 2
 
+  const diceRollMessageColor = '#ffb84d'
+
   // Slash Command: ... 
   slapp.command('/roll', (msg) => {
+
+
+    var nameOfDiceRoller = msg.body.user_name
+
+
+    //    /(\w*)+[\|]/i
+
+    if (msg.body.text.indexOf('|') != -1) {
+      var commandParameters = msg.body.text.split('|')
+      nameOfDiceRoller = commandParameters[0]
+    }
+
 
     var command = msg.body.text.toString()
     var results = []
@@ -152,13 +166,13 @@ module.exports = (app) => {
     
         msg.say({
           response_type: 'in_channel',
-          username: 'RpgXDice',
+          username: `RpgXDice   @${msg.body.user_name}`,
           icon_url: 'https://d30y9cdsu7xlg0.cloudfront.net/png/10617-200.png',
           text: '',
           attachments: [{
             text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
-            title: `${msg.body.user_name} rolled:`,
-            color: "#4bbff4",
+            title: `${nameOfDiceRoller} rolled:`,
+            color: diceRollMessageColor,
             mrkdwn_in: ["text", "pretext"],
             //thumb_url: `${npcThumb}`
           }]
