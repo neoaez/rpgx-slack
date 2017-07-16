@@ -145,14 +145,14 @@ module.exports = (app) => {
 
     var modifier = 0
     if (modifiers) {
-      for (j = 0; j < modifiers.length; j++) {
+      for (var j = 0; j < modifiers.length; j++) {
         modifier += modifiers[j].parseInt
       }
     }
 
     var rollResults = null
 
-    for (i = 0; i < quantity; i++) {
+    for (var i = 0; i < quantity; i++) {
       rollResults.push(Math.floor(Math.random() * faces) + 1)
     }
 
