@@ -148,10 +148,27 @@ module.exports = (app) => {
 
 
     for (var k = 0; k < results.length; k++) {
-      msg.respond(`${msg.body.user_name} rolled: ${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
+      //msg.say(`${msg.body.user_name} rolled: ${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
     
+        msg.say({
+          response_type: 'in_channel',
+          username: 'RpgXDice',
+          icon_url: 'https://d30y9cdsu7xlg0.cloudfront.net/png/10617-200.png',
+          text: '',
+          attachments: [{
+            text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
+            title: `${msg.body.user_name} rolled:`,
+            color: "#4bbff4",
+            mrkdwn_in: ["text", "pretext"],
+            //thumb_url: `${npcThumb}`
+          }]
+        })
+
+
       /** [TO DO]
        * use attachments and message buttons to show/hide roll details 
+       * 
+       * use icon to distringuish die rolls: https://d30y9cdsu7xlg0.cloudfront.net/png/10617-200.png
        */
       
     }
