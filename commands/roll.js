@@ -198,6 +198,7 @@ module.exports = (app) => {
                   mrkdwn_in: ["text", "pretext"],
                   thumb_url: `${diceRollIcon}`,
 
+                  callback_id: 'rollDetails_callback_id',
                   actions: [
                       {
                           name: 'rollDetails',
