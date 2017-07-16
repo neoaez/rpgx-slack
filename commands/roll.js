@@ -84,7 +84,7 @@ module.exports = (app) => {
       // [DEBUG]  
       console.log(`roll: ${rolls[i]}`)
 
-      var diceArray = rolls[i].match(diceRegExp)[0]
+      var diceArray = rolls[i].match(diceRegExp)
       var dice = "1d6"
       var quantityArray = null
       var quantity = 1
@@ -95,10 +95,21 @@ module.exports = (app) => {
       console.info(`[DEBUG] diceArray: ${diceArray}`)
       
       if (diceArray) {
+        // [DEBUG]
+        console.info(`[DEBUG] diceArray has value...`)
+        
         quantityArray = diceArray[0].match(/(\d*)+[d]/i)
-        if (quantityArray) { quantity = quantityArray[0].match(/[(\d*)]+/)[0] }
+        if (quantityArray) { 
+          // [DEBUG]
+          console.info(`[DEBUG] quantityArray has value...`)
+          quantity = quantityArray[0].match(/[(\d*)]+/)[0] 
+        }
         facesArray = diceArray[0].match(/[d](\d*)+/i)
-        if (facesArray) { faces = facesArray[0].match(/[(\d*)]+/)[0] }
+        if (facesArray) { 
+          // [DEBUG]
+          console.info(`[DEBUG] facesArray has value...`)
+          faces = facesArray[0].match(/[(\d*)]+/)[0] 
+        }
       }
 
       // See if we are using the Target number option
