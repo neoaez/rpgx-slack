@@ -30,6 +30,7 @@ module.exports = (app, text) => {
         if (!err) {
           if (val) {
             npcThumb = val.thumb
+            npcColor = val.color
           } 
           msg.say({
             response_type: 'in_channel',
