@@ -120,7 +120,7 @@ module.exports = (app) => {
       results.push(diceRoll(quantity, faces, target, modifiers, successesRequired, bTotalResults))
 
       // [DEBUG]
-      console.info(`[DEBUG] results: ${results}`)
+      //console.info(`[DEBUG] results: ${results}`)
     }
 
 
@@ -128,7 +128,9 @@ module.exports = (app) => {
     // incoming request from Slack
     msg.respond(`code: ${command}`)
 
-    msg.respond(`rolled: [${results[0].rolls}] (*${results[0].modifiedTotal}*)`)
+    for (var k = 0; k < results.length; k++) {
+      msg.respond(`rolled: [${results[0].rolls}] (*${results[0].modifiedTotal}*)`)
+    }
 
   })
 
