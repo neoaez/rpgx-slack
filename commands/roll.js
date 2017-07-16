@@ -153,7 +153,7 @@ module.exports = (app) => {
       var bTotalResults = false
       if (rolls[i].indexOf(sumResultsSymbol) != -1) { bTotalResults = true }
 
-      if (quantity > 0 && faces > 0) {
+      if (quantity > 0 && (faces > 0 || faces == fateDiceSymbol)) {
         results.push(diceRoll(quantity, faces, target, modifiers, successesRequired, bTotalResults))
       }
     }
