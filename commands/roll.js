@@ -142,13 +142,13 @@ module.exports = (app) => {
     
       // `respond` is used for actions or commands and uses the `response_url` provided by the
       // incoming request from Slack
-      msg.respond(`code: ${rolls[i]}`)
+      //msg.respond(`code: ${rolls[i]}`)
     }
 
 
 
     for (var k = 0; k < results.length; k++) {
-      msg.respond(`rolled: [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
+      msg.respond(`${msg.body.user_name} rolled: ${diceArray[0]} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
     }
 
   })
