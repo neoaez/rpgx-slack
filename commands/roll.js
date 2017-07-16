@@ -352,6 +352,7 @@ module.exports = (app) => {
     console.info(`[DEBUG] SHOW_DETAILS action caught...`)
     
     msg.say({
+      replace_original: true,
       response_type: 'in_channel',
       username: msg.body.original_message.username,
       icon_url: msg.body.original_message.icon_url,
@@ -383,6 +384,7 @@ module.exports = (app) => {
     console.info(`[DEBUG] SHOW_SUMMARY action caught...`)
     
     msg.say({
+      replace_original: true,      
       response_type: 'in_channel',
       username: msg.body.original_message.username,
       icon_url: msg.body.original_message.icon_url,
