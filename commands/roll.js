@@ -139,15 +139,16 @@ module.exports = (app) => {
 
       // [DEBUG]
       //console.info(`[DEBUG] results: ${results}`)
+    
+      // `respond` is used for actions or commands and uses the `response_url` provided by the
+      // incoming request from Slack
+      msg.respond(`code: ${rolls[i]}`)
     }
 
 
-    // `respond` is used for actions or commands and uses the `response_url` provided by the
-    // incoming request from Slack
-    msg.respond(`code: ${rolls[i]}`)
 
     for (var k = 0; k < results.length; k++) {
-      msg.respond(`rolled: [${results[0].rolls}] (*${results[0].modifiedTotal}*)`)
+      msg.respond(`rolled: [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
     }
 
   })
