@@ -357,7 +357,7 @@ module.exports = (app) => {
       icon_url: msg.body.original_message.icon_url,
       text: msg.body.original_message.text,
       attachments: [{
-        text: msg.body.original_message.attachments[0].text
+        text: msg.body.original_message.attachments[0].text,
         //title: `${diceRollerName} rolled:`,
         color: msg.body.original_message.attachments[0].color,
         mrkdwn_in:  msg.body.original_message.attachments[0].mrdwn_in,
@@ -388,7 +388,7 @@ module.exports = (app) => {
       icon_url: msg.body.original_message.icon_url,
       text: msg.body.original_message.text,
       attachments: [{
-        text: msg.body.original_message.attachments[0].text
+        text: msg.body.original_message.attachments[0].text,
         //title: `${diceRollerName} rolled:`,
         color: msg.body.original_message.attachments[0].color,
         mrkdwn_in:  msg.body.original_message.attachments[0].mrdwn_in,
