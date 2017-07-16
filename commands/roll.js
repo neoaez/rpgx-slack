@@ -29,7 +29,7 @@ module.exports = (app) => {
   const bestOrWorstResultsRegExp = /([b|w](\d*))+/i
   const successRegExp = /([s](\d*))+/i
   const targetRegExp = /([>|<](\d*))+/i
-  const modifierRegExp = /([+|-|*|/](\d*))+/i
+  const modifierRegExp = /([+|-|*|/](\d*))+/ig
   const addModifierRegExp = /([+](\d*))+/ig
   const subtractModifierRegExp = /([-](\d*))+/ig
   const multiplyModifierRegExp = /([*](\d*))+/ig
