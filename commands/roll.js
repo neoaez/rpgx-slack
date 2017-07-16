@@ -47,6 +47,11 @@ module.exports = (app) => {
   // Slash Command: ... 
   slapp.command('/roll', (msg) => {
 
+    var commandParameters = null
+    var command = null
+
+    var results = []
+    var rolls = []
 
     var nameOfDiceRoller = msg.body.user_name
 
@@ -54,14 +59,15 @@ module.exports = (app) => {
     //    /(\w*)+[\|]/i
 
     if (msg.body.text.indexOf('|') != -1) {
-      var commandParameters = msg.body.text.split('|')
+      commandParameters = msg.body.text.split('|')
       nameOfDiceRoller = commandParameters[0]
+      command = commandParameters[1]
+    } else {
+      command = msg.body.text
     }
 
 
-    var command = msg.body.text.toString()
-    var results = []
-    var rolls = []
+
     /*
     rolls = {
       {
