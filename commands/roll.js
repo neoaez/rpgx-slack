@@ -147,9 +147,13 @@ module.exports = (app) => {
     var modifier = 0
     if (modifiers) {
       for (var j = 0; j < modifiers.length; j++) {
-        modifier += modifiers[j].parseInt
-      }
+        modifier += modifiers[j].parseInt()
+        // [DEBUG]
+        console.info(`[DEBUG] modifier: ${modifiers[j].parseInt()}`)      }
     }
+
+    // [DEBUG]
+    console.info(`[DEBUG] modifier total: ${modifier}`)
 
     var rollResults = []
     var rollTotal = 0
