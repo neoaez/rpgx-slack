@@ -128,7 +128,7 @@ module.exports = (app) => {
     // incoming request from Slack
     msg.respond(`code: ${command}`)
 
-    msg.respond(`rolled: [${results[0].rolls}] (*${results[0].total}*)`)
+    msg.respond(`rolled: [${results[0].rolls}] (*${results[0].modifiedTotal}*)`)
 
   })
 
@@ -140,6 +140,7 @@ module.exports = (app) => {
       target: target,
       successesRequired: successesRequired,
       total: 0,
+      modifiedTotal: 0,
       rolls: []
     }
 
@@ -160,7 +161,7 @@ module.exports = (app) => {
     }
 
     poolResults.total = rollTotal;
-   
+    poolResults.modifiedTotal = rollTotal + modifier
 
     /** [TO DO] 
      * 
