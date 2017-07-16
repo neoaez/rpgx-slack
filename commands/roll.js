@@ -148,7 +148,7 @@ module.exports = (app) => {
 
 
     for (var k = 0; k < results.length; k++) {
-      msg.respond(`${msg.body.user_name} rolled: ${results.quantity}d${results.faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
+      msg.respond(`${msg.body.user_name} rolled: ${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
     
       /** [TO DO]
        * use attachments and message buttons to show/hide roll details 
