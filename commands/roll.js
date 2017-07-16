@@ -128,7 +128,7 @@ module.exports = (app) => {
     // incoming request from Slack
     msg.respond(`code: ${command}`)
 
-    msg.respond(`results: ${results}`)
+    msg.respond(`results: ${results[0].rolls}`)
 
   })
 
@@ -140,7 +140,7 @@ module.exports = (app) => {
       target: target,
       successesRequired: successesRequired,
       total: 0,
-      rolls: null
+      rolls: []
     }
 
     var modifier = 0
