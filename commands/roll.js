@@ -80,32 +80,35 @@ module.exports = (app) => {
       // [DEBUG]  
       console.log(`roll: ${rolls[i]}`)
 
-      var dice = command.match(diceRegExp)
+      var diceArray = command.match(diceRegExp)
+      var dice = "1d6"
+      var quantityArray = null
       var quantity = 1
+      var facesArray = null
       var faces = 6
-      if (dice) {
-        quantity = dice.match(/(\d*)+[d]/i)
-        if (quantity) { quantity = quantity.match(/[(\d*)]+/) }
-        faces = dice.match(/[d](\d*)+/i)
-        if (faces) { faces = faces.match(/[(\d*)]+/) }
+      if (diceArray) {
+        quantityArray = diceArray[0].match(/(\d*)+[d]/i)
+        if (quantityArray) { quantity = quantityArray[0].match(/[(\d*)]+/)[0] }
+        facesArray = diceArray[0].match(/[d](\d*)+/i)
+        if (facesArray) { faces = facesArray[0].match(/[(\d*)]+/)[0] }
       }
 
       // See if we are using the Target number option
       var target = command.match(targetRegExp)
-      if (target) { target = target.match(/[(\d*)]+/) }
+      if (target) { target = target[0].match(/[(\d*)]+/)[0] }
 
       // See if we are using the Successes required option
       var successesRequired = command.match(successRegExp)
-      if (successesRequired) { successesRequired = successesRequired.match(/[(\d*)]+/) }
+      if (successesRequired) { successesRequired = successesRequired[0].match(/[(\d*)]+/)[0] }
 
       var modifiers = command.match(modifierRegExp)
 
       var resultsToHighlight = command.match(bestOrWorstResultsRegExp)
       var highlightType = HighlightNoResults
       if (resultsToHighlight) { 
-        if (resultsToHighlight.match(/[b]/i)) {
+        if (resultsToHighlight[0].match(/[b]/i)) {
           highlightType = HighlightBestResults
-        } else if (resultsToHighlight.match(/[w]/i)) {
+        } else if (resultsToHighlight[0].match(/[w]/i)) {
           highlightType = HighlightWorstResults
         }
       }
