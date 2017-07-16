@@ -91,10 +91,12 @@ module.exports = (app) => {
           if (val) {
             diceRollerThumb = val.thumb
             diceRollerColor = val.color
-          }  
+          }  else {
+            console.error(`[ERROR] no value for [${msg.body.user_id}::NPC::${diceRollerName}]`)
+          }
         } else {
             // [TO DO] handle error
-            console.error(`[ERROR] error retrieving data for [${msg.body.user_id}::NPC::${diceRollerName}]`)
+            console.error(`[ERROR] issue retrieving data for [${msg.body.user_id}::NPC::${diceRollerName}]`)
         }    
       })
     } else { 
