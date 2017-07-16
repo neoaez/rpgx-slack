@@ -188,7 +188,7 @@ module.exports = (app) => {
                 text: '',
                 attachments: [{
                   text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
-                  title: `${diceRollerName} rolled:`,
+                  //title: `${diceRollerName} rolled:`,
                   color: `${diceRollerColor}`,
                   mrkdwn_in: ["text", "pretext"],
                   thumb_url: `${diceRollIcon}`
