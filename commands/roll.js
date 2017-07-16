@@ -24,16 +24,16 @@
 module.exports = (app) => {
   let slapp = app.slapp
 
-  //const fullDiceRegExp = /(\d*)([d](\d*)([+|-|*|/](\d*)))+/ig
+  //const fullDiceRegExp = /(\d*)([d](\d*)([\+|\-|\*|\/](\d*)))+/ig
   const diceRegExp = /((\d*)[d](\d*))+/i
   const bestOrWorstResultsRegExp = /([b|w](\d*))+/i
   const successRegExp = /([s](\d*))+/i
   const targetRegExp = /([>|<](\d*))+/i
-  const modifierRegExp = /([+|-|*|/](\d*))+/ig
-  const addModifierRegExp = /([+](\d*))+/ig
-  const subtractModifierRegExp = /([-](\d*))+/ig
-  const multiplyModifierRegExp = /([*](\d*))+/ig
-  const divideModifierRegExp = /([/](\d*))+/ig
+  const modifierRegExp = /([\+|\-|\*|\/](\d*))+/ig
+  const addModifierRegExp = /([\+](\d*))+/ig
+  const subtractModifierRegExp = /([\-](\d*))+/ig
+  const multiplyModifierRegExp = /([\*](\d*))+/ig
+  const divideModifierRegExp = /([\/](\d*))+/ig
 
   const multiplePoolsSeparator = ','
   const explodeSymbol = '!'
