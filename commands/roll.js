@@ -192,22 +192,8 @@ module.exports = (app) => {
                 icon_url: `${diceRollerThumb}`,
                 text: '',
                 attachments: [{
-                  text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
-                  //title: `${diceRollerName} rolled:`,
-                  color: `${diceRollerColor}`,
-                  mrkdwn_in: ["text", "pretext"],
-                  thumb_url: `${diceRollIcon}`
-                }]
-              })
-
-              .say({
-                response_type: 'in_channel',
-                username: `${username}   (@${msg.body.user_name})`,
-                icon_url: `${diceRollerThumb}`,
-                text: '',
-                attachments: [{
                 text: 
-                  `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)\n-----------------\nDice: ${results[k].quantity}d${results[k].faces}\nModifiers: ${results[k].modifiers} (*${results[k].modifier}*)\nRoll(s): [${results[k].rolls}]\nRoll Total: ${results[k].total} (*${results[k].modifiedTotal}*)`,                  
+                  `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)\n\n-----------------\n\n_Dice:_ ${results[k].quantity}d${results[k].faces}\n_Modifiers:_ ${results[k].modifiers} (*${results[k].modifier}*)\n_Roll(s):_ [${results[k].rolls}]\n_Total:_ ${results[k].total} (*${results[k].modifiedTotal}*)`,
                   color: `${diceRollerColor}`,
                   mrkdwn_in: ["text", "pretext"],
                   thumb_url: `${diceRollIcon}`
@@ -238,23 +224,8 @@ module.exports = (app) => {
           icon_url: `${diceRollerThumb}`,
           text: '',
           attachments: [{
-            text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
-            title: `${diceRollerName} rolled:`,
-            color: `${diceRollerColor}`,
-            mrkdwn_in: ["text", "pretext"],
-            thumb_url: `${diceRollIcon}`
-          }]
-        })
-
-        // roll details message 
-        .say({
-          response_type: 'in_channel',
-          username: `${username}   (@${msg.body.user_name})`,
-          icon_url: `${diceRollerThumb}`,
-          text: '',
-          attachments: [{
             text: 
-                  `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)\n-----------------\nDice: ${results[k].quantity}d${results[k].faces}\nModifiers: ${results[k].modifiers} (*${results[k].modifier}*)\nRoll(s): [${results[k].rolls}]\nRoll Total: ${results[k].total} (*${results[k].modifiedTotal}*)`,
+                  `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)\n\n-----------------\n\n_Dice:_ ${results[k].quantity}d${results[k].faces}\n_Modifiers:_ ${results[k].modifiers} (*${results[k].modifier}*)\n_Roll(s):_ [${results[k].rolls}]\n_Total:_ ${results[k].total} (*${results[k].modifiedTotal}*)`,
                   color: `${diceRollerColor}`,
                   mrkdwn_in: ["text", "pretext"],
                   thumb_url: `${diceRollIcon}`,
@@ -264,10 +235,6 @@ module.exports = (app) => {
             thumb_url: `${diceRollIcon}`
           }]          
         })
-
-        // set unthread to make sure other messages are not threaded
-        // [TO DO] test to see if this is even needed
-        //.unthread()
       }
     }
   })
