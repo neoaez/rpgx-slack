@@ -87,6 +87,7 @@ module.exports = (app) => {
           }  
         } else {
             // [TO DO] handle error
+            console.error(`[ERROR] error retrieving data for [${msg.body.user_id}::NPC::${diceRollerName}]`)
         }    
       })
     }
