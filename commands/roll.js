@@ -47,7 +47,7 @@ module.exports = (app) => {
 
     var command = msg.body.text.toString()
     var results = []
-    var rolls = null
+    var rolls = []
     /*
     rolls = {
       {
@@ -69,9 +69,9 @@ module.exports = (app) => {
 
     // Get what dice pools we are rolling
     if (command.indexOf(multiplePoolsSeparator)) {
-      rolls  = command.split(multiplePoolsSeparator)
+      rolls = command.split(multiplePoolsSeparator)
     } else {
-      rolls = command
+      rolls.push(command)
     }
     // [TO DO] add error handling. If there are no dice to roll then we need to give feedback to the user and exit
 
@@ -81,7 +81,7 @@ module.exports = (app) => {
       // [DEBUG]  
       console.log(`roll: ${rolls[i]}`)
 
-      var diceArray = command.match(diceRegExp)
+      var diceArray = rolls[i].match(diceRegExp)[0]
       var dice = "1d6"
       var quantityArray = null
       var quantity = 1
