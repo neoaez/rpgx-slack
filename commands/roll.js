@@ -199,17 +199,37 @@ module.exports = (app) => {
                   thumb_url: `${diceRollIcon}`,
 
                   callback_id: 'rollDetails_callback',
-                  actions: [
-                      {
-                          name: 'rollDetails',
-                          text: 'Details',
-                          type: 'button',
-                          value: 'SHOW_DETAILS'
-                      }
-                  ]
-
+                  actions: [{
+                    name: 'rollDetails',
+                    text: 'Details',
+                    type: 'button',
+                    value: 'SHOW_DETAILS'
+                  }]
                 }]
               })
+
+
+              msg.thread()
+
+              msg.say({
+                response_type: 'in_channel',
+                username: `${username}   (@${msg.body.user_name})`,
+                icon_url: `${diceRollerThumb}`,
+                text: '',
+                attachments: [{
+                text: 
+                  `Dice: ${results[k].quantity}d${results[k].faces}\n
+                  Modifiers: ${results[k].modifiers} (*${results[k].modifier}*)\n
+                  Roll(s): [${results[k].rolls}]\n 
+                  Roll Total: ${results[k].total} (*${results[k].modifiedTotal}*)`,                  
+                  color: `${diceRollerColor}`,
+                  mrkdwn_in: ["text", "pretext"],
+                  thumb_url: `${diceRollIcon}`
+                }]
+              })
+              
+
+              msg.unthread()
             }
           }  else {
             console.error(`[ERROR] no value for [${msg.body.user_id}::NPC::${diceRollerName}]`)
@@ -242,43 +262,50 @@ module.exports = (app) => {
             thumb_url: `${diceRollIcon}`,
 
             callback_id: 'rollDetails_callback',
-            actions: [
-                {
-                    name: 'rollDetails',
-                    text: 'Details',
-                    type: 'button',
-                    value: 'SHOW_DETAILS'
-                }
-            ]
-
-
-
+            actions: [{
+              name: 'rollDetails',
+              text: 'Details',
+              type: 'button',
+              value: 'SHOW_DETAILS'
+            }]
           }]
         })
+
+        // thread the next message containing the detailed output for the requested roll
+        msg.thread()
+
+        // roll details message 
+        msg.say({
+          response_type: 'in_channel',
+          username: `${username}   (@${msg.body.user_name})`,
+          icon_url: `${diceRollerThumb}`,
+          text: '',
+          attachments: [{
+            text: 
+              `Dice: ${results[k].quantity}d${results[k].faces}\n
+              Modifiers: ${results[k].modifiers} (*${results[k].modifier}*)\n
+              Roll(s): [${results[k].rolls}]\n 
+              Roll Total: ${results[k].total} (*${results[k].modifiedTotal}*)`,
+            title: `${diceRollerName} rolled:`,
+            color: `${diceRollerColor}`,
+            mrkdwn_in: ["text", "pretext"],
+            thumb_url: `${diceRollIcon}`
+          }]          
+        })
+
+        // set unthread to make sure other messages are not threaded
+        // [TO DO] test to see if this is even needed
+        msg.unthread()
       }
     }
-// =============================================================
   })
-
-
-    // dice stuff was here
-
-
-
-    // msg stuff was here
-
-
-      /** [TO DO]
-       * use attachments and message buttons to show/hide roll details 
-       * 
-       * use icon to distringuish die rolls: https://d30y9cdsu7xlg0.cloudfront.net/png/10617-200.png
-       */
-      
 
 
 
   /**
-   * 
+   * ==========================================================================
+   * diceRoll 
+   * ==========================================================================
    * @param {*} quantity 
    * @param {*} faces 
    * @param {*} target 
@@ -346,7 +373,8 @@ module.exports = (app) => {
   }
 
 
-//                    callback_id: 'rollDetails_callback',
+//=============================================================================
+//=============================================================================
 
   slapp.action('rollDetails_callback', 'rollDetails', 'SHOW_DETAILS', (msg, val) => {
     console.info(`[DEBUG] SHOW_DETAILS action caught...`)
