@@ -150,7 +150,7 @@ module.exports = (app) => {
       }
     }
 
-    var rollResults = null
+    var rollResults = []
 
     for (var i = 0; i < quantity; i++) {
       rollResults.push(Math.floor(Math.random() * faces) + 1)
