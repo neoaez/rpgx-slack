@@ -26,15 +26,16 @@ module.exports = (app) => {
   let kv = app.dataStore
 
   //const fullDiceRegExp = /(\d*)([d](\d*)([\+|\-|\*|\/](\d*)))+/ig
-  const diceRegExp = /((\d*)[d](\d*))+/i
-  const bestOrWorstResultsRegExp = /([b|w](\d*))+/i
-  const successRegExp = /([s](\d*))+/i
-  const targetRegExp = /([>|<](\d*))+/i
-  const modifierRegExp = /([ \+ | \- | \* | \/ ](\d*))+/ig
-  const addModifierRegExp = /([\+](\d*))+/ig
-  const subtractModifierRegExp = /([\-](\d*))+/ig
-  const multiplyModifierRegExp = /([\*](\d*))+/ig
-  const divideModifierRegExp = /([\/](\d*))+/ig
+  const diceRegExp = /(\d{1,}d\d{1,})/i            // /((\d*)[d](\d*))+/i
+  const fateDiceRegExp = /(\d{1,}df)/i
+  const bestOrWorstResultsRegExp = /([b w](\d{1,}))/i
+  const successRegExp = /(s\d{1,})/i
+  const targetRegExp = /(t[><](\d{1,}))/i
+  const modifierRegExp = /([ \+ \- \* \/ ](\d{1,}))/ig
+  const addModifierRegExp = /(\+\d{1,})/ig
+  const subtractModifierRegExp = /(\-\d{1,})/ig
+  const multiplyModifierRegExp = /(\*\d{1,})/ig
+  const divideModifierRegExp = /(\/\d{1,})/ig
 
   const multiplePoolsSeparator = ','
   const explodeSymbol = '!'
@@ -43,6 +44,8 @@ module.exports = (app) => {
   const HighlightBestResults = 1
   const HighlightWorstResults = 2
   const contextSymbol = ':'
+
+  const fateDiceSymbol = 'f'
 
   const MessageContextUser = 0
   const MessageContextCharacter = 1
@@ -113,17 +116,17 @@ module.exports = (app) => {
         // [DEBUG]
         console.info(`[DEBUG] diceArray has value...`)
         
-        quantityArray = diceArray[0].match(/(\d*)+[d]/i)
+        quantityArray = diceArray[0].match(/^(\d*d)/i)
         if (quantityArray) { 
           // [DEBUG]
           console.info(`[DEBUG] quantityArray has value...`)
-          quantity = quantityArray[0].match(/[(\d*)]+/)[0] 
+          quantity = quantityArray[0].match(/^(\d*)/)[0] 
         }
-        facesArray = diceArray[0].match(/[d](\d*)+/i)
+        facesArray = diceArray[0].match(/(d\d{1,})/i)
         if (facesArray) { 
           // [DEBUG]
           console.info(`[DEBUG] facesArray has value...`)
-          faces = facesArray[0].match(/[(\d*)]+/)[0] 
+          faces = facesArray[0].match(/(\d{1,})/)[0] 
         }
       }
 
