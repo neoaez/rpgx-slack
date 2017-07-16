@@ -153,7 +153,7 @@ module.exports = (app) => {
       var bTotalResults = false
       if (rolls[i].indexOf(sumResultsSymbol) != -1) { bTotalResults = true }
 
-      if (quantity > 0 && (faces > 0 || faces == fateDiceSymbol)) {
+      if (quantity > 0 && (faces > 0 || faces.toLowerCase() == fateDiceSymbol)) {
         results.push(diceRoll(quantity, faces, target, modifiers, successesRequired, bTotalResults))
       }
     }
@@ -295,7 +295,7 @@ module.exports = (app) => {
     var floor = 1
 
     // fate dice
-    if (faces == fateDiceSymbol) { 
+    if (faces.toLowerCase() == fateDiceSymbol) { 
       faces = 3 
       floor = -1
     }
