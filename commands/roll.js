@@ -144,12 +144,15 @@ module.exports = (app) => {
       rolls: []
     }
 
+    // [DEBUG]
+    console.info(`[DEBUG] modifer list: ${modifiers}`)
     var modifier = 0
     if (modifiers) {
       for (var j = 0; j < modifiers.length; j++) {
         modifier += parseInt(modifiers[j])
         // [DEBUG]
-        console.info(`[DEBUG] modifier: ${parseInt(modifiers[j])}`)      }
+        console.info(`[DEBUG] modifier: ${parseInt(modifiers[j])}`)
+      }
     }
 
     // [DEBUG]
