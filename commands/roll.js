@@ -28,10 +28,10 @@ module.exports = (app) => {
   //const fullDiceRegExp = /(\d*)([d](\d*)([\+|\-|\*|\/](\d*)))+/ig
   const diceRegExp = /(\d{1,}d[\d{1,}f])/i            // /((\d*)[d](\d*))+/i
   const fateDiceRegExp = /(\d{1,}df)/i
-  const bestOrWorstResultsRegExp = /([b w](\d{1,}))/i
+  const bestOrWorstResultsRegExp = /([bw](\d{1,}))/i
   const successRegExp = /(s\d{1,})/i
   const targetRegExp = /(t[><](\d{1,}))/i
-  const modifierRegExp = /([ \+ \- \* \/ ]\d{1,})/ig
+  const modifierRegExp = /([\+\-\*\/]\d{1,})/ig
   const addModifierRegExp = /(\+\d{1,})/ig
   const subtractModifierRegExp = /(\-\d{1,})/ig
   const multiplyModifierRegExp = /(\*\d{1,})/ig
