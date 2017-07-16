@@ -209,9 +209,9 @@ module.exports = (app) => {
               })
 
 
-              msg.thread()
+              .thread()
 
-              msg.say({
+              .say({
                 response_type: 'in_channel',
                 username: `${username}   (@${msg.body.user_name})`,
                 icon_url: `${diceRollerThumb}`,
@@ -229,7 +229,7 @@ module.exports = (app) => {
               })
               
 
-              msg.unthread()
+              //.unthread()
             }
           }  else {
             console.error(`[ERROR] no value for [${msg.body.user_id}::NPC::${diceRollerName}]`)
@@ -272,10 +272,10 @@ module.exports = (app) => {
         })
 
         // thread the next message containing the detailed output for the requested roll
-        msg.thread()
+        .thread()
 
         // roll details message 
-        msg.say({
+        .say({
           response_type: 'in_channel',
           username: `${username}   (@${msg.body.user_name})`,
           icon_url: `${diceRollerThumb}`,
@@ -295,7 +295,7 @@ module.exports = (app) => {
 
         // set unthread to make sure other messages are not threaded
         // [TO DO] test to see if this is even needed
-        msg.unthread()
+        //.unthread()
       }
     }
   })
