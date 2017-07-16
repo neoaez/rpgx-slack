@@ -32,8 +32,8 @@ module.exports = (app, text) => {
             npcThumb = val.thumb
           } 
           msg.say({
-            //response_type: 'in_channel',
-            username: npcName,
+            response_type: 'in_channel',
+            username: `${npcName} (_${msg.body.user_name}_)`,
             icon_url: npcThumb,
             text: '',
             attachments: [{
@@ -41,7 +41,7 @@ module.exports = (app, text) => {
               //title: `${npcName}`,
               color: "#4bbff4",
               mrkdwn_in: ["text", "pretext"],
-              thumb_url: `${npcThumb}`
+              //thumb_url: `${npcThumb}`
             }]
           })
         } else {
