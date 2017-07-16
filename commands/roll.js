@@ -193,7 +193,7 @@ module.exports = (app) => {
                 text: '',
                 attachments: [{
                 text: 
-                  `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)\n\n-----------------\n\n_Dice:_ ${results[k].quantity}d${results[k].faces}\n_Modifiers:_ ${results[k].modifiers} (*${results[k].modifier}*)\n_Roll(s):_ [${results[k].rolls}]\n_Total:_ ${results[k].total} (*${results[k].modifiedTotal}*)`,
+                  `[${results[k].rolls}] (*${results[k].modifiedTotal}*)\n\n-----------------\n\n_Dice:_ ${results[k].quantity}d${results[k].faces}\n_Modifiers:_ ${results[k].modifiers} (*${results[k].modifier}*)\n_Roll(s):_ [${results[k].rolls}]\n_Total:_ ${results[k].total} (*${results[k].modifiedTotal}*)`,
                   color: `${diceRollerColor}`,
                   mrkdwn_in: ["text", "pretext"],
                   thumb_url: `${diceRollIcon}`
@@ -225,7 +225,7 @@ module.exports = (app) => {
           text: '',
           attachments: [{
             text: 
-                  `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)\n\n-----------------\n\n_Dice:_ ${results[k].quantity}d${results[k].faces}\n_Modifiers:_ ${results[k].modifiers} (*${results[k].modifier}*)\n_Roll(s):_ [${results[k].rolls}]\n_Total:_ ${results[k].total} (*${results[k].modifiedTotal}*)`,
+                  `[${results[k].rolls}] (*${results[k].modifiedTotal}*)\n\n-----------------\n\n_Dice:_ ${results[k].quantity}d${results[k].faces}\n_Modifiers:_ ${results[k].modifiers} (*${results[k].modifier}*)\n_Roll(s):_ [${results[k].rolls}]\n_Total:_ ${results[k].total} (*${results[k].modifiedTotal}*)`,
                   color: `${diceRollerColor}`,
                   mrkdwn_in: ["text", "pretext"],
                   thumb_url: `${diceRollIcon}`,
