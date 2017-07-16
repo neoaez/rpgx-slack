@@ -46,7 +46,7 @@ module.exports = (app) => {
   slapp.command('/roll', (msg) => {
 
     var command = msg.body.text.toString()
-    var results = null
+    var results = []
     var rolls = null
     /*
     rolls = {
