@@ -68,6 +68,8 @@ module.exports = (app) => {
 
     //    /(\w*)+[\|]/i
 
+// =============================================================
+    // ====  Get message context 
     if (msg.body.text.indexOf(contextSymbol) != -1) {
       commandParameters = msg.body.text.split(contextSymbol)
       username = commandParameters[0]
@@ -78,58 +80,9 @@ module.exports = (app) => {
       command = msg.body.text
     }
 
-    // [DEBUG]
-      console.info(`[DEBUG] message context: ${messageContext}`)
 
 
-    if(messageContext == MessageContextCharacter) {
-
-      // [DEBUG]
-      console.info(`[DEBUG] message context is CHARACTER`)
-
-      // retrieve npc data if it exists
-      kv.get(`${msg.body.user_id}::NPC::${diceRollerName}`, function (err, val) {
-
-        if (!err) {
-          if (val) {
-            diceRollerThumb = val.thumb
-            diceRollerColor = val.color
-
-            // [DEBUG]
-            console.info(`thumb: ${val.thumb} | color: ${val.color}`)
-          }  else {
-            console.error(`[ERROR] no value for [${msg.body.user_id}::NPC::${diceRollerName}]`)
-          }
-        } else {
-            // [TO DO] handle error
-            console.error(`[ERROR] issue retrieving data for [${msg.body.user_id}::NPC::${diceRollerName}]`)
-        }    
-      })
-    } else { 
-      // [DEBUG]
-      console.info(`[DEBUG] message context is USER`)
-    }
-
-    /*
-    rolls = {
-      {
-        dice: '10d6',
-        mods: ['+5'],
-        successes: '2',
-        target: '>4',
-        results: [1,1,1,1,1,1,1,1,1,1],
-        rolltotal: 10,
-        modtotal: 15,
-        verdict: 'success'
-      },
-      {
-
-      }
-    }
-
-    */
-
-    // Get what dice pools we are rolling
+        // Get what dice pools we are rolling
     if (command.indexOf(multiplePoolsSeparator)) {
       rolls = command.split(multiplePoolsSeparator)
     } else {
@@ -198,32 +151,92 @@ module.exports = (app) => {
       if (rolls[i].indexOf(sumResultsSymbol) != -1) { bTotalResults = true }
 
       results.push(diceRoll(quantity, faces, target, modifiers, successesRequired, bTotalResults))
-
-      // [DEBUG]
-      //console.info(`[DEBUG] results: ${results}`)
     }
 
 
 
-    for (var k = 0; k < results.length; k++) {
-      //msg.say(`${msg.body.user_name} rolled: ${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
-    
-      // [DEBUG]
-      console.info(`diceRollerThumb: ${diceRollerThumb} | diceRollerColor: ${diceRollerColor}`)
+    // [DEBUG]
+      console.info(`[DEBUG] message context: ${messageContext}`)
 
-      msg.say({
-        response_type: 'in_channel',
-        username: `${username}   (@${msg.body.user_name})`,
-        icon_url: `${diceRollerThumb}`,
-        text: '',
-        attachments: [{
-          text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
-          title: `${diceRollerName} rolled:`,
-          color: `${diceRollerColor}`,
-          mrkdwn_in: ["text", "pretext"],
-          thumb_url: `${diceRollIcon}`
-        }]
+
+    if(messageContext == MessageContextCharacter) {
+
+      // [DEBUG]
+      console.info(`[DEBUG] message context is CHARACTER`)
+
+      // retrieve npc data if it exists
+      kv.get(`${msg.body.user_id}::NPC::${diceRollerName}`, function (err, val) {
+
+        if (!err) {
+          if (val) {
+            diceRollerThumb = val.thumb
+            diceRollerColor = val.color
+
+            // [DEBUG]
+            console.info(`thumb: ${val.thumb} | color: ${val.color}`)
+
+            for (var k = 0; k < results.length; k++) {
+              //msg.say(`${msg.body.user_name} rolled: ${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
+            
+              // [DEBUG]
+              console.info(`diceRollerThumb: ${diceRollerThumb} | diceRollerColor: ${diceRollerColor}`)
+
+              msg.say({
+                response_type: 'in_channel',
+                username: `${username}   (@${msg.body.user_name})`,
+                icon_url: `${diceRollerThumb}`,
+                text: '',
+                attachments: [{
+                  text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
+                  title: `${diceRollerName} rolled:`,
+                  color: `${diceRollerColor}`,
+                  mrkdwn_in: ["text", "pretext"],
+                  thumb_url: `${diceRollIcon}`
+                }]
+              })
+            }
+          }  else {
+            console.error(`[ERROR] no value for [${msg.body.user_id}::NPC::${diceRollerName}]`)
+          }
+        } else {
+            // [TO DO] handle error
+            console.error(`[ERROR] issue retrieving data for [${msg.body.user_id}::NPC::${diceRollerName}]`)
+        }       
       })
+    } else { 
+      // [DEBUG]
+      console.info(`[DEBUG] message context is USER`)
+
+      for (var k = 0; k < results.length; k++) {
+        //msg.say(`${msg.body.user_name} rolled: ${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
+      
+        // [DEBUG]
+        console.info(`diceRollerThumb: ${diceRollerThumb} | diceRollerColor: ${diceRollerColor}`)
+
+        msg.say({
+          response_type: 'in_channel',
+          username: `${username}   (@${msg.body.user_name})`,
+          icon_url: `${diceRollerThumb}`,
+          text: '',
+          attachments: [{
+            text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
+            title: `${diceRollerName} rolled:`,
+            color: `${diceRollerColor}`,
+            mrkdwn_in: ["text", "pretext"],
+            thumb_url: `${diceRollIcon}`
+          }]
+        })
+      }
+    }
+// =============================================================
+  })
+
+
+    // dice stuff was here
+
+
+
+    // msg stuff was here
 
 
       /** [TO DO]
@@ -232,9 +245,8 @@ module.exports = (app) => {
        * use icon to distringuish die rolls: https://d30y9cdsu7xlg0.cloudfront.net/png/10617-200.png
        */
       
-    }
 
-  })
+
 
   /**
    * 
@@ -296,6 +308,4 @@ module.exports = (app) => {
 
     return poolResults
   }
-  
-
 }
