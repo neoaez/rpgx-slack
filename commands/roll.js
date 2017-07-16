@@ -128,11 +128,11 @@ module.exports = (app) => {
     // incoming request from Slack
     msg.respond(`code: ${command}`)
 
-    msg.respond(`results: ${results[0].rolls}`)
+    msg.respond(`rolled: [${rolls[0].rolls}] (*${rolls[0].total}*)`)
 
   })
 
-  var diceRoll = function (quantity, faces, target, modifiers, successesRequired, bTotalResults) {
+  var diceRoll = function (quantity, faces, target, modifiers, successesRequired) {
     var poolResults = {
       quantity: quantity,
       faces: faces,
@@ -151,10 +151,16 @@ module.exports = (app) => {
     }
 
     var rollResults = []
+    var rollTotal = 0
 
     for (var i = 0; i < quantity; i++) {
-      rollResults.push(Math.floor(Math.random() * faces) + 1)
+      var roll = Math.floor(Math.random() * faces) + 1
+      rollTotal += roll
+      rollResults.push(roll)
     }
+
+    poolResults.total = rollTotal;
+   
 
     /** [TO DO] 
      * 
