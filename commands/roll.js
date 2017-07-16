@@ -96,7 +96,7 @@ module.exports = (app) => {
             diceRollerColor = val.color
 
             // [DEBUG]
-            console.info(`thumb: ${val.thumb}| color: ${val.color}`)
+            console.info(`thumb: ${val.thumb} | color: ${val.color}`)
           }  else {
             console.error(`[ERROR] no value for [${msg.body.user_id}::NPC::${diceRollerName}]`)
           }
@@ -208,19 +208,22 @@ module.exports = (app) => {
     for (var k = 0; k < results.length; k++) {
       //msg.say(`${msg.body.user_name} rolled: ${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
     
-        msg.say({
-          response_type: 'in_channel',
-          username: `${username}   (@${msg.body.user_name})`,
-          icon_url: `${diceRollerThumb}`,
-          text: '',
-          attachments: [{
-            text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
-            title: `${diceRollerName} rolled:`,
-            color: `${diceRollerColor}`,
-            mrkdwn_in: ["text", "pretext"],
-            thumb_url: `${diceRollIcon}`
-          }]
-        })
+      // [DEBUG]
+      console.info(`diceRollerThumb: ${diceRollerThumb} | diceRollerColor: ${diceRollerColor}`)
+
+      msg.say({
+        response_type: 'in_channel',
+        username: `${username}   (@${msg.body.user_name})`,
+        icon_url: `${diceRollerThumb}`,
+        text: '',
+        attachments: [{
+          text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
+          title: `${diceRollerName} rolled:`,
+          color: `${diceRollerColor}`,
+          mrkdwn_in: ["text", "pretext"],
+          thumb_url: `${diceRollIcon}`
+        }]
+      })
 
 
       /** [TO DO]
