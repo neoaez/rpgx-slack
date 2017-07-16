@@ -211,12 +211,12 @@ module.exports = (app) => {
         msg.say({
           response_type: 'in_channel',
           username: `${username}   (@${msg.body.user_name})`,
-          icon_url: diceRollerThumb,
+          icon_url: `${diceRollerThumb}`,
           text: '',
           attachments: [{
             text: `${results[k].quantity}d${results[k].faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`,
             title: `${diceRollerName} rolled:`,
-            color: diceRollerColor,
+            color: `${diceRollerColor}`,
             mrkdwn_in: ["text", "pretext"],
             thumb_url: `${diceRollIcon}`
           }]
