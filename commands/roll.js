@@ -29,7 +29,7 @@ module.exports = (app) => {
   const bestOrWorstResultsRegExp = /([b|w](\d*))+/i
   const successRegExp = /([s](\d*))+/i
   const targetRegExp = /([>|<](\d*))+/i
-  const modifierRegExp = /([\+|\-|\*|\/](\d*))+/ig
+  const modifierRegExp = /([ \+ | \- | \* | \/ ](\d*))+/ig
   const addModifierRegExp = /([\+](\d*))+/ig
   const subtractModifierRegExp = /([\-](\d*))+/ig
   const multiplyModifierRegExp = /([\*](\d*))+/ig
@@ -166,7 +166,7 @@ module.exports = (app) => {
     
         msg.say({
           response_type: 'in_channel',
-          username: `RpgXDice   @${msg.body.user_name}`,
+          username: `RpgXDice   (@${msg.body.user_name})`,
           icon_url: 'https://d30y9cdsu7xlg0.cloudfront.net/png/10617-200.png',
           text: '',
           attachments: [{
@@ -188,6 +188,15 @@ module.exports = (app) => {
     }
 
   })
+
+  /**
+   * 
+   * @param {*} quantity 
+   * @param {*} faces 
+   * @param {*} target 
+   * @param {*} modifiers 
+   * @param {*} successesRequired 
+   */
 
   var diceRoll = function (quantity, faces, target, modifiers, successesRequired) {
     var poolResults = {
