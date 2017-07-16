@@ -148,7 +148,12 @@ module.exports = (app) => {
 
 
     for (var k = 0; k < results.length; k++) {
-      msg.respond(`${msg.body.user_name} rolled: ${diceArray[0]} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
+      msg.respond(`${msg.body.user_name} rolled: ${results.quantity}d${results.faces} [${results[k].rolls}] (*${results[k].modifiedTotal}*)`)
+    
+      /** [TO DO]
+       * use attachments and message buttons to show/hide roll details 
+       */
+      
     }
 
   })
@@ -158,6 +163,7 @@ module.exports = (app) => {
       quantity: quantity,
       faces: faces,
       modifiers: modifiers,
+      modifier: 0,
       target: target,
       successesRequired: successesRequired,
       total: 0,
@@ -174,6 +180,7 @@ module.exports = (app) => {
         // [DEBUG]
         console.info(`[DEBUG] modifier: ${parseInt(modifiers[j])}`)
       }
+      poolResults.modifier = modifier
     }
 
     // [DEBUG]
