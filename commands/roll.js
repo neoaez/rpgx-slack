@@ -117,7 +117,7 @@ module.exports = (app) => {
       var bTotalResults = false
       if (command.indexOf(sumResultsSymbol) != -1) { bTotalResults = true }
 
-      results.push(diceRoll(quantity, faces, target, modifier, successesRequired, bTotalResults))
+      results.push(diceRoll(quantity, faces, target, modifiers, successesRequired, bTotalResults))
 
       // [DEBUG]
       console.info(`[DEBUG] results: ${results}`)
