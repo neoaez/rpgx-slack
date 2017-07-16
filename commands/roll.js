@@ -126,7 +126,7 @@ module.exports = (app) => {
         if (facesArray) { 
           // [DEBUG]
           console.info(`[DEBUG] facesArray has value...`)
-          faces = facesArray[0].match(/([\d{1,}f])/)[0] 
+          faces = facesArray[0].match(/([\d{1,}f])/i)[0] 
         }
       }
 
