@@ -186,7 +186,7 @@ module.exports = (app) => {
               // [DEBUG]
               console.info(`diceRollerThumb: ${diceRollerThumb} | diceRollerColor: ${diceRollerColor}`)
 
-              msg.thread().say({
+              msg.say({
                 response_type: 'in_channel',
                 username: `${username}   (@${msg.body.user_name})`,
                 icon_url: `${diceRollerThumb}`,
@@ -249,7 +249,7 @@ module.exports = (app) => {
         // [DEBUG]
         console.info(`diceRollerThumb: ${diceRollerThumb} | diceRollerColor: ${diceRollerColor}`)
 
-        msg.thread().say({
+        msg.say({
           response_type: 'in_channel',
           username: `${username}   (@${msg.body.user_name})`,
           icon_url: `${diceRollerThumb}`,
