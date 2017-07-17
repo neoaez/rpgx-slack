@@ -122,11 +122,11 @@ module.exports = (app) => {
           console.info(`[DEBUG] quantityArray has value...`)
           quantity = quantityArray[0].match(/^(\d{1,})/)[0] 
         }
-        facesArray = diceArray[0].match(/(d[\d{1,}f])/i)
+        facesArray = diceArray[0].match(/d(\d{1,}|f)/i)
         if (facesArray) { 
           // [DEBUG]
           console.info(`[DEBUG] facesArray has value...`)
-          faces = facesArray[0].match(/([\d{1,}f])/i)[0] 
+          faces = facesArray[0].match(/(\d{1,}|f)/i)[0] 
         }
       }
 
