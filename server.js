@@ -51,7 +51,7 @@ require('./events/attachment.js')(app)
 require('./commands/roll.js')(app)
 require('./commands/narrate.js')(app)
 require('./commands/char.js')(app)
-require('./commands/char+.js')(app)
+require('./commands/char_add.js')(app)
 
 
 // Catch-all for any other responses not handled above
