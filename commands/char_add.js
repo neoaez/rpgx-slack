@@ -1,3 +1,4 @@
+'use strict'
 
 var request = require('request')
 
@@ -24,12 +25,13 @@ module.exports = (app, text) => {
     var characterName = ''
     var characterThumb = ''
     var characterColor = defaultCharacterColor
+    var characterSheetUrl = ''
     
     if (characterData) {
       if (characterData[0] != '' && characterData.length > 0) { characterName = characterData[0]}
       if (characterData[1] != '' && characterData.length > 1) { characterThumb = characterData[1]}
       if (characterData[2] != '' && characterData.length > 2) { characterColor = characterData[2]}
-      if (characterData[3] != '' && characterData.length > 3) { characterSheet = characterData[3]}        
+      if (characterData[3] != '' && characterData.length > 3) { characterSheetUrl = characterData[3]}        
     } else {
       // [TO DO] handle error
     }
@@ -39,7 +41,7 @@ module.exports = (app, text) => {
 
 
     if (characterName != '') {
-      kv.set(`${userID}::NPC::${characterName}`, { name: characterName, thumb: characterThumb, color: characterColor, sheet_url: characterSheet_url }, function (err) {
+      kv.set(`${userID}::NPC::${characterName}`, { name: characterName, thumb: characterThumb, color: characterColor, sheet_url: characterSheetUrl }, function (err) {
         //[TO DO] handle error
       })
     } else {
