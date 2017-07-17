@@ -31,8 +31,11 @@ module.exports = (app, text) => {
       kv.get(`${userID}::NPC::${npcName}`, function (err, val) {
         if (!err) {
           if (val) {
-            npcThumb = val.thumb
-            npcColor = val.color
+            // [DEBUG]
+            console.info (`[DEBUG] retrieved data: ${val}`)
+
+            if (val.thumb) { npcThumb = val.thumb }
+            if (val.color) { npcColor = val.color }
           } 
           msg.say({
             response_type: 'in_channel',
