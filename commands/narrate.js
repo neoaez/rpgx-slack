@@ -1,4 +1,4 @@
-
+'use strict'
 
 module.exports = (app, text) => {
   let slapp = app.slapp
@@ -8,6 +8,8 @@ module.exports = (app, text) => {
   // Slash Command: ... 
   slapp.command('/narrate', (msg) => {
 
+    const defaultNPCColor = '#006666'
+
     const contextSymbol = ':'
 
     var userID = msg.body.user_id
@@ -16,6 +18,7 @@ module.exports = (app, text) => {
     var npcName = null
     var npcText = null
     var npcThumb = ''
+    var npcColor = defaultNPCColor
 
     if (msg.body.text.indexOf(contextSymbol) != -1) {
       var commandParameters = msg.body.text.split(contextSymbol)
@@ -60,7 +63,7 @@ module.exports = (app, text) => {
           text: '',
           attachments: [{
             text: `${npcText}`,
-            color: "#4bbff4",
+            color: `${npcColor}`,
             mrkdwn_in: ["text", "pretext"],
           }]
         })          
