@@ -34,6 +34,9 @@ module.exports = (app, text) => {
       // [TO DO] handle error
     }
 
+    // [DEBUG]
+    console.info(`character data: ${characterData}`)
+
 
     if (characterName != '') {
       kv.set(`${userID}::NPC::${characterName}`, { name: characterName, thumb: characterThumb, color: characterColor, sheet_url: characterSheet_url }, function (err) {
