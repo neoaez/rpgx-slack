@@ -26,7 +26,7 @@ module.exports = (app) => {
   let kv = app.dataStore
 
   //const fullDiceRegExp = /(\d*)([d](\d*)([\+|\-|\*|\/](\d*)))+/ig
-  const diceRegExp = /(\d{1,}d[\d{1,}f]+)/i            // /((\d*)[d](\d*))+/i
+  const diceRegExp = /(\d{1,}d)(\d{1,}|f)/i            // /((\d*)[d](\d*))+/i
   const fateDiceRegExp = /(\d{1,}df)/i
   const bestOrWorstResultsRegExp = /([bw](\d{1,}))/i
   const successRegExp = /(s\d{1,})/i
