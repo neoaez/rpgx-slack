@@ -11,7 +11,7 @@ module.exports = (app, text) => {
   let kv = app.dataStore
 
   // Slash Command: ... 
-  slapp.command('/char+', (msg) => {
+  slapp.command('/char_add', (msg) => {
 
     var userID = msg.body.user_id
     console.info(`user: ${userID}`)
