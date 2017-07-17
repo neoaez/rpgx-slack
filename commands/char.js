@@ -11,8 +11,13 @@ module.exports = (app, text) => {
 
     var userID = msg.body.user_id
     console.info(`user: ${userID}`)
+    /** [TO DO] restrict access to this command to the channel owner and those authorized
+     * 
+     * will need to setup ROLES and store that data in the persist storage
+     */
 
-    // [TO DO] fine a way to safely load JSON data without accidentally processing any functions or malicious code
+
+    // [TO DO] find a way to safely load JSON data without accidentally processing any functions or malicious code
     var url = msg.body.text
     var jsonData = null
 
@@ -22,18 +27,21 @@ module.exports = (app, text) => {
     }, function (error, response, body) {
 
         if (!error && response.statusCode === 200) {
-          console.log(body) // Print the json response
+          // [DEBUG]
+          //console.log(body) // Print the json response
           jsonData = body
 
-          console.info(`Character data loaded. Author: ${jsonData.author}`)
+          // [DEBUG]
+          //console.info(`Character data loaded. Author: ${jsonData.author}`)
 
-          console.info(`${jsonData.characters}`)
+          // [DEBUG]
+          //console.info(`${jsonData.characters}`)
 
           var characters = jsonData.characters
 
-          characters.forEach (function(character){
+          // [TO DO] validate the data and handle any errors
 
-            // testing persist data
+          characters.forEach (function(character){
             kv.set(`${userID}::NPC::${character.name}`, { name: character.name, thumb: character.thumb, color: character.color, sheet_url: character.sheet_url }, function (err) {
               //[TO DO] handle error
             })
