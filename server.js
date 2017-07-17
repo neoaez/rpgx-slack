@@ -50,7 +50,9 @@ require('./events/thanks.js')(app)
 require('./events/attachment.js')(app)
 require('./commands/roll.js')(app)
 require('./commands/narrate.js')(app)
-require('./commands/npc.js')(app)
+require('./commands/char.js')(app)
+require('./commands/char+.js')(app)
+
 
 // Catch-all for any other responses not handled above
 slapp.message('.*', ['direct_mention', 'direct_message'], (msg) => {
